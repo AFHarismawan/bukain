@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Bukain</string>
+    <string name="font_family_medium">sans-serif-medium</string>
+
+    <string name="navigate_back_label" formatted="false">Navigate back</string>
+    <string name="navigation_header_activity" formatted="false">Activity</string>
+    <string name="stats_funded" formatted="false">funded</string>
+    <string name="stats_backers" formatted="false">backers</string>
+    <string name="stats_days" formatted="false">days to go</string>
+
+    <string name="deadline_units_days" formatted="false">days</string>
+    <string name="deadline_units_hours" formatted="false">hours</string>
+    <string name="deadline_units_mins" formatted="false">mins</string>
+    <string name="deadline_units_secs" formatted="false">secs</string>
+    <string name="time_left_to_go" formatted="false">%{time_left} to go</string>
+</resources>

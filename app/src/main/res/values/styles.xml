@@ -1,0 +1,71 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Widget -->
+    <style name="ToolbarBase" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/primary</item>
+        <item name="android:foregroundGravity">center_vertical</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="Toolbar" parent="ToolbarBase" />
+
+    <style name="ProgressBar" parent="Base.Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_bar_horizontal</item>
+    </style>
+
+    <!-- Typography -->
+    <style name="TextPrimary">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextSecondary">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Headline" parent="TextPrimary">
+        <item name="android:textSize">@dimen/headline</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+
+    <style name="BodyPrimary" parent="TextPrimary">
+        <item name="android:textSize">@dimen/body</item>
+        <item name="android:lineSpacingExtra">@dimen/body_line_spacing_extra</item>
+    </style>
+
+    <style name="BodyPrimaryMedium" parent="BodyPrimary">
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+
+    <style name="CaptionPrimary" parent="TextPrimary">
+        <item name="android:textSize">@dimen/caption</item>
+        <item name="android:lineSpacingExtra">@dimen/caption_line_spacing_extra</item>
+    </style>
+
+    <style name="CaptionPrimaryMedium" parent="CaptionPrimary">
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+
+    <style name="CaptionSecondary" parent="TextSecondary">
+        <item name="android:textSize">@dimen/caption</item>
+        <item name="android:lineSpacingExtra">@dimen/caption_line_spacing_extra</item>
+    </style>
+
+    <style name="CaptionSecondaryMedium" parent="CaptionSecondary">
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+
+</resources>
