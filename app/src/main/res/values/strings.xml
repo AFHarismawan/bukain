@@ -29,5 +29,10 @@
     <string name="login_placeholder_email" formatted="false">Email address</string>
     <string name="login_placeholder_password" formatted="false">Password</string>
     <string name="login_buttons_log_in" formatted="false">Log in</string>
+    <string name="login_tout_buttons_log_in_with_facebook" formatted="false">Log in with Facebook</string>
+    <string name="login_tout_buttons_log_in_with_google" formatted="false">Log in with Google</string>
+    <string name="login_buttons_log_in_email" formatted="false">Log in with email</string>
+    <string name="signup_button_email" formatted="false">Sign up with email</string>
 
+    <string name="login_tout_disclaimer_we_never_post_anything_without_permission" formatted="false">We\'ll never post anything without your permission.</string>
 </resources>
