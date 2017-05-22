@@ -28,6 +28,6 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder {
         funded = (TextView) itemView.findViewById(R.id.project_funded);
         deadline = (TextView) itemView.findViewById(R.id.project_deadline);
         percentageFunded = (ProgressBar) itemView.findViewById(R.id.percentage_funded);
-        deadline = (TextView) itemView.findViewById(R.id.deadline_countdown_unit);
+        deadlineUnit = (TextView) itemView.findViewById(R.id.deadline_countdown_unit);
     }
 }

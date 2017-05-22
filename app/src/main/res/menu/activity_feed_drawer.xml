@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_login"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="Log in" />
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_all_project"
+            android:icon="@drawable/ic_assignment_black_24dp"
+            android:title="All Projects" />
+        <item
+            android:id="@+id/nav_project_we_love"
+            android:icon="@drawable/ic_favorite_black_24dp"
+            android:title="Projects We Love" />
+    </group>
+</menu>
