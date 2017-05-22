@@ -43,32 +43,32 @@ public class ActivityFeedAdapter extends RecyclerView.Adapter<ProjectViewHolder>
     public void onBindViewHolder(ProjectViewHolder holder, int position) {
         Project project = list.get(position);
 
-        if (project.projectImage != null) {
+        if (project.image != null) {
             final int targetImageWidth = (int) (ViewUtils.getScreenWidthDp(context) * ViewUtils.getScreenDensity(context));
             final int targetImageHeight = ProjectUtils.photoHeightFromWidthRatio(targetImageWidth);
             holder.projectImage.setMaxHeight(targetImageHeight);
 
             Picasso.with(context)
-                    .load(project.projectImage)
+                    .load(project.image)
                     .resize(targetImageWidth, targetImageHeight)
                     .centerCrop()
                     .placeholder(ContextCompat.getDrawable(context, R.drawable.gray_gradient))
                     .into(holder.projectImage);
         }
 
-        if (project.projectName != null) {
-            holder.projectName.setText(project.projectName);
+        if (project.name != null) {
+            holder.projectName.setText(project.name);
         }
 
-        if (project.projectDesc != null) {
-            holder.projectDesc.setText(project.projectDesc);
+        if (project.desc != null) {
+            holder.projectDesc.setText(project.desc);
         }
 
-        if (project.projectCategory != null) {
-            holder.projectCategory.setText(project.projectCategory);
+        if (project.category != null) {
+            holder.projectCategory.setText(project.category);
         }
 
-        holder.percentageFunded.setProgress(project.funded);
+        holder.percentageFunded.setProgress(project.fundedPercent());
 
         holder.backers.setText(project.backers());
         holder.funded.setText(project.funded());

@@ -6,16 +6,21 @@ package in.buka.app.models;
 
 public class Project {
 
-    public String projectImage;
-    public String projectCategory, projectName, projectDesc;
-    public int backers, funded;
+    public String image, video;
+    public String category, name, desc;
+    public long funded, modal;
+    public int backers;
     public long deadline;
 
     public String backers() {
         return Integer.toString(backers);
     }
 
+    public int fundedPercent() {
+        return (int) (modal / funded) * 100;
+    }
+
     public String funded() {
-        return Integer.toString(funded) + "%";
+        return Integer.toString(fundedPercent()) + "%";
     }
 }

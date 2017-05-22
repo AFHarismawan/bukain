@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import in.buka.app.R;
+import in.buka.app.models.Project;
 
 /**
  * Created by A. Fauzi Harismawan on 5/6/2017.
@@ -23,6 +24,7 @@ public class ActivityFeedActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private FirebaseDatabase database;
+
 
     private String TAG = "BUKAIN";
 
@@ -40,7 +42,11 @@ public class ActivityFeedActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, dataSnapshot.toString());
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                        
+                }
+                Project project = dataSnapshot.child("0").getValue(Project.class);
+                Log.d(TAG, project.name + " " + project.desc);
             }
 
             @Override
