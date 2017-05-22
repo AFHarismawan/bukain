@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import in.buka.app.R;
-import in.buka.app.libs.models.Project;
+import in.buka.app.models.Project;
 import in.buka.app.libs.utils.ProjectUtils;
 import in.buka.app.libs.utils.ViewUtils;
 import in.buka.app.ui.viewholders.ProjectViewHolder;

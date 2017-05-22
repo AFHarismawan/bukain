@@ -1,4 +1,4 @@
-package in.buka.app.libs.models;
+package in.buka.app.models;
 
 /**
  * Created by A. Fauzi Harismawan on 06/05/2017.

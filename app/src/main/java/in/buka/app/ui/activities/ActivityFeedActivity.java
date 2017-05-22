@@ -4,6 +4,13 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import in.buka.app.R;
 
@@ -15,6 +22,9 @@ public class ActivityFeedActivity extends AppCompatActivity {
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
+    private FirebaseDatabase database;
+
+    private String TAG = "BUKAIN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +34,19 @@ public class ActivityFeedActivity extends AppCompatActivity {
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_feed_swipe_refresh_layout);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
+        database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("projects");
 
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, dataSnapshot.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
