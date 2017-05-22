@@ -42,12 +42,25 @@
     <dimen name="caption">12sp</dimen>
     <dimen name="headline">18sp</dimen>
     <dimen name="body">14sp</dimen>
+    <dimen name="subhead">16sp</dimen>
+    <dimen name="editorial_subhead">20sp</dimen>
+    <dimen name="editorial_headline">22sp</dimen>
 
     <dimen name="caption_line_spacing_extra">2dp</dimen>
     <dimen name="body_line_spacing_extra">2dp</dimen>
+    <dimen name="subhead_line_spacing_extra">4dp</dimen>
 
     <!-- Widgets -->
     <dimen name="button_icon_fixed_width">48dp</dimen>
     <dimen name="progress_bar_min_height">3dp</dimen>
     <dimen name="progress_bar_height">3dp</dimen>
+
+    <!-- Buttons -->
+    <dimen name="settings_icon_fixed_width">@dimen/grid_6</dimen>
+    <dimen name="button_corner_radius">@dimen/grid_1_half</dimen>
+    <dimen name="button_stroke_width">1dp</dimen>
+    <dimen name="project_action_button_height">60dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>

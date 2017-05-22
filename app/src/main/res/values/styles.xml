@@ -68,4 +68,39 @@
         <item name="android:fontFamily">@string/font_family_medium</item>
     </style>
 
+    <style name="SubheadPrimary" parent="TextPrimary">
+        <item name="android:textSize">@dimen/subhead</item>
+        <item name="android:lineSpacingExtra">@dimen/subhead_line_spacing_extra</item>
+    </style>
+
+    <style name="SubheadPrimaryMedium" parent="SubheadPrimary">
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+
+    <style name="SubheadSecondaryMedium" parent="TextSecondary">
+        <item name="android:textSize">@dimen/subhead</item>
+        <item name="android:lineSpacingExtra">@dimen/subhead_line_spacing_extra</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+
+    <style name="BodySecondary" parent="TextSecondary">
+        <item name="android:textSize">@dimen/body</item>
+        <item name="android:lineSpacingExtra">@dimen/body_line_spacing_extra</item>
+    </style>
+
+    <style name="Button" parent="Base.Widget.AppCompat.Button">
+        <item name="android:textColor">@drawable/button_text_white</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/grid_3</item>
+        <item name="android:paddingRight">@dimen/grid_3</item>
+    </style>
+
+    <style name="RoundedButton" parent="Button" />
+
+    <style name="GreenRoundedButton" parent="RoundedButton">
+        <item name="android:background">@drawable/button_green_rounded</item>
+    </style>
 </resources>

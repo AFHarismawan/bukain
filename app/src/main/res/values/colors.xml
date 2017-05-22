@@ -16,6 +16,39 @@
     <color name="green">#2bde73</color>
     <color name="transparent">@android:color/transparent</color>
 
+    <color name="blue">#00a0ff</color>
+    <color name="dark_blue">#081245</color>
+    <color name="light_blue">#e8f6ff</color>
+    <color name="light_green">#def7e0</color>
+    <color name="gray_black">#ff464646</color>
+    <color name="off_white">#fafafa</color>
+    <color name="orange">#f7aa1a</color>
+    <color name="mint">#ffe3fdf9</color>
+    <color name="pink">#ffecf0</color>
+    <color name="royal_blue">#ff2752ff</color>
+    <color name="text_dark">#ff0f2105</color>
+    <color name="text_light">#ffffffff</color>
+    <color name="yellow">#ffffc9</color>
+    <color name="medium_gray">#ebebee</color>
+
+    <!-- Colors with hex opacity:
+      http://stackoverflow.com/questions/5445085/understanding-colors-in-android-6-characters/11019879#11019879 -->
+    <color name="accent_alpha_20">@color/blue_alpha_20</color>
+    <color name="black_alpha_5">#0d000000</color>
+    <color name="black_alpha_10">#1a000000</color>
+    <color name="black_alpha_30">#4D000000</color>
+    <color name="black_alpha_50">#88000000</color>
+    <color name="blue_alpha_20">#3300a0ff</color>
+    <color name="blue_darken_10">#0087E6</color>
+    <color name="gray_alpha_50">#80d9d9de</color>
+    <color name="gray_darken_10">#C0C0C5</color>
+    <color name="green_alpha_20">#332bde73</color>
+    <color name="green_alpha_50">#802bde73</color>
+    <color name="green_darken_10">#12C55A</color>
+    <color name="green_darken_20">#00AB40</color>
+    <color name="green_lighten_10">#45F88D</color>
+    <color name="white_alpha_60">#99ffffff</color>
+
     <!-- Click colors -->
     <color name="dark_gray_click">#1f000000</color>
     <color name="light_gray_click">#42ffffff</color>
