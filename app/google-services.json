@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "1078593170956",
+    "firebase_url": "https://bukain-455a6.firebaseio.com",
+    "project_id": "bukain-455a6",
+    "storage_bucket": "bukain-455a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078593170956:android:5612012f4429b474",
+        "android_client_info": {
+          "package_name": "in.buka.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078593170956-lf246dqs2q5c6do6lp24aeacmfj00qhk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.buka.app",
+            "certificate_hash": "74ed6ff7f884a8269c85cc3ccc7e1b13c77bee3b"
+          }
+        },
+        {
+          "client_id": "1078593170956-k08fv42c2aal8ucbqum5kdpbmv5827nc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.buka.app",
+            "certificate_hash": "8ce19636d158a8d13d65a527fab92bd26da33045"
+          }
+        },
+        {
+          "client_id": "1078593170956-5s2e2m623ccctq8al4cmtgaastvoo037.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzxsZcHq60N0zkzqxyu1_2Ai7tFcEO7OM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078593170956-5s2e2m623ccctq8al4cmtgaastvoo037.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
