@@ -14,6 +14,7 @@
         <item name="android:foregroundGravity">center_vertical</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="android:layout_width">match_parent</item>
+
     </style>
 
     <style name="Toolbar" parent="ToolbarBase" />
