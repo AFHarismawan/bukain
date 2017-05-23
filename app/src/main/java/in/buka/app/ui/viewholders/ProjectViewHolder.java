@@ -12,8 +12,9 @@ import in.buka.app.R;
  * Created by A. Fauzi Harismawan on 06/05/2017.
  */
 
-public class ProjectViewHolder extends RecyclerView.ViewHolder {
+public class ProjectViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+    public String id;
     public ImageView projectImage;
     public TextView projectCategory, projectName, projectDesc, backers, funded, deadline, deadlineUnit;
     public ProgressBar percentageFunded;
@@ -29,5 +30,10 @@ public class ProjectViewHolder extends RecyclerView.ViewHolder {
         deadline = (TextView) itemView.findViewById(R.id.project_deadline);
         percentageFunded = (ProgressBar) itemView.findViewById(R.id.percentage_funded);
         deadlineUnit = (TextView) itemView.findViewById(R.id.deadline_countdown_unit);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

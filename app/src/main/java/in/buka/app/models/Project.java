@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 
 public class Project {
 
+    public String id;
     public String image, video;
     public String category, name, desc;
     public long funded, modal;

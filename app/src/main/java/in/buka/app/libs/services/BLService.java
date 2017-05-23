@@ -14,16 +14,16 @@ import in.buka.app.libs.utils.HttpUtils;
 public class BLService extends Service {
 
     public static String KEY_URL = "url";
-    public static String KEY_JSON = "json";
+    public static String KEY_DATA = "data";
     public static String KEY_RESPONSE = "response";
 
     @Override
     public int onStartCommand(Intent intent,  int flags, int startId) {
         Bundle recv = intent.getExtras();
         String url = recv.getString(KEY_URL);
-        String json = recv.getString(KEY_JSON);
+        String data = recv.getString(KEY_DATA);
 
-        String response = HttpUtils.sendJSONtoServer(url, json);
+        String response = HttpUtils.sendPOSTRequest(url, data);
 
         //send broadcast
         Intent i = new Intent("in.buka.app.REQUEST_COMPLETE");

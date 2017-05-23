@@ -11,9 +11,12 @@ public class User {
     public @Nullable Integer createdProjectsCount;
     public @Nullable Boolean gamesNewsletter;
     public @Nullable Boolean happeningNewsletter;
-    public long id;
+    public int id;
     public @Nullable String location;
     public String name;
+    public String token;
+    public String email;
+    public String omnikey;
 
     public void getDataFromBL(){
 

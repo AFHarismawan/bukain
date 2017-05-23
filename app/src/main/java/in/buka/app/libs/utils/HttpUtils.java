@@ -3,12 +3,11 @@ package in.buka.app.libs.utils;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import in.buka.app.ui.activities.ActivityFeedActivity;
 
@@ -18,20 +17,20 @@ import in.buka.app.ui.activities.ActivityFeedActivity;
 
 public class HttpUtils {
 
-    public static String sendJSONtoServer(String url, String jsonParam) {
+
+
+    public static String sendPOSTRequest(String url, String data) {
         URL ur;
         HttpURLConnection conn = null;
         try {
             ur = new URL(url);
             conn = (HttpURLConnection) ur.openConnection();
-            conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
 
-            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-            wr.writeBytes(URLEncoder.encode(jsonParam, "UTF-8"));
-            wr.flush();
-            wr.close();
+            OutputStreamWriter streamWriter = new OutputStreamWriter(conn.getOutputStream());
+            streamWriter.write(data);
+            streamWriter.flush();
 
             StringBuilder sb = new StringBuilder();
             int HttpResult = conn.getResponseCode();

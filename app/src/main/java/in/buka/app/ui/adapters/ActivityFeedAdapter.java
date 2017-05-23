@@ -43,6 +43,10 @@ public class ActivityFeedAdapter extends RecyclerView.Adapter<ProjectViewHolder>
     public void onBindViewHolder(ProjectViewHolder holder, int position) {
         Project project = list.get(position);
 
+        if (project.id != null) {
+            holder.id = project.id;
+        }
+
         if (project.image != null) {
             final int targetImageWidth = (int) (ViewUtils.getScreenWidthDp(context) * ViewUtils.getScreenDensity(context));
             final int targetImageHeight = ProjectUtils.photoHeightFromWidthRatio(targetImageWidth);
