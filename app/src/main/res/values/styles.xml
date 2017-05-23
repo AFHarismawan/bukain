@@ -135,7 +135,7 @@
         <item name="android:text">@string/login_tout_buttons_log_in_with_google</item>
         <item name="android:paddingLeft">@dimen/grid_1</item>
         <item name="android:paddingRight">@dimen/grid_3</item>
-        <item name="android:drawableStart">@drawable/ic_social_google</item>
+        <item name="android:drawableStart">@drawable/ic_white_social_google</item>
     </style>
 
     <style name="GreenRoundedButton" parent="RoundedButton">

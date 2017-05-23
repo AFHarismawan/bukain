@@ -1,5 +1,6 @@
 package in.buka.app.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -107,7 +108,13 @@ public class ActivityFeedActivity extends AppCompatActivity implements Navigatio
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
+        Intent change;
+        switch (id){
+            case R.id.nav_login:
+                change = new Intent(this, ToutActivity.class);
+                startActivity(change);
+                break;
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
