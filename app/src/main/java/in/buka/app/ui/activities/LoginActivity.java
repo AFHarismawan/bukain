@@ -1,5 +1,6 @@
 package in.buka.app.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import in.buka.app.R;
+import in.buka.app.libs.configs.Constants;
+import in.buka.app.libs.services.BLService;
 
 /**
  * Created by A. Fauzi Harismawan on 22/05/2017.
@@ -43,7 +46,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-
+        Intent service = new Intent(this, BLService.class);
+        Bundle send = new Bundle();
+        send.putString(BLService.KEY_URL, Constants.LOGIN_URL);
     }
 
     @Override
