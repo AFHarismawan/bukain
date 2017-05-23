@@ -36,7 +36,7 @@ public class ActivityFeedActivity extends AppCompatActivity implements Navigatio
     private FirebaseDatabase database;
     private ArrayList<Project> projects = new ArrayList<>();
 
-    private String TAG = "BUKAIN";
+    public static String TAG = "BUKAIN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

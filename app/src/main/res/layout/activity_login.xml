@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/card_margin_x"
+        android:layout_marginRight="@dimen/card_margin_x"
+        android:layout_marginTop="@dimen/grid_2"
+        app:hintTextAppearance="@style/BodySecondary">
+
+        <EditText
+            android:id="@+id/email"
+            style="@style/SubheadPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_placeholder_email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/card_margin_x"
+        android:layout_marginRight="@dimen/card_margin_x"
+        android:layout_marginTop="@dimen/grid_1"
+        app:hintTextAppearance="@style/BodySecondary">
+
+        <EditText
+            android:id="@+id/password"
+            style="@style/SubheadPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/grid_2"
+            android:hint="@string/login_placeholder_password"
+            android:inputType="textPassword" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/login_button"
+        style="@style/GreenRoundedButton"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/card_margin_x"
+        android:layout_marginRight="@dimen/card_margin_x"
+        android:layout_marginTop="@dimen/grid_2"
+        android:enabled="false"
+        android:text="@string/login_buttons_log_in" />
+
+</LinearLayout>

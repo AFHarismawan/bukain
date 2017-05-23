@@ -5,19 +5,19 @@
     <selector>
       <item android:state_selected="true">
         <shape>
-          <solid android:color="@color/green_darken_10"/>
+          <solid android:color="@color/dark_red"/>
           <corners android:radius="@dimen/button_corner_radius"/>
         </shape>
       </item>
       <item android:state_pressed="true">
         <shape>
-          <solid android:color="@color/green_darken_10"/>
+          <solid android:color="@color/dark_red"/>
           <corners android:radius="@dimen/button_corner_radius"/>
         </shape>
       </item>
       <item>
         <shape>
-          <solid android:color="@color/green"/>
+          <solid android:color="@color/light_red"/>
           <corners android:radius="@dimen/button_corner_radius"/>
         </shape>
       </item>
@@ -26,7 +26,7 @@
 
   <item android:state_enabled="false">
     <shape>
-      <solid android:color="@color/green_alpha_50"/>
+      <solid android:color="@color/red_alpha"/>
       <corners android:radius="@dimen/button_corner_radius"/>
     </shape>
   </item>

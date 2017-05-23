@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Bukain</string>
+    <string name="bl_service">BLService</string>
     <string name="font_family_medium">sans-serif-medium</string>
 
     <string name="navigate_back_label" formatted="false">Navigate back</string>
@@ -13,18 +14,11 @@
     <string name="deadline_units_mins" formatted="false">mins</string>
     <string name="deadline_units_secs" formatted="false">secs</string>
     <string name="time_left_to_go" formatted="false">%{time_left} to go</string>
-    <string name="title_activity_login">Sign in</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
     <string name="login_placeholder_email" formatted="false">Email address</string>
     <string name="login_placeholder_password" formatted="false">Password</string>

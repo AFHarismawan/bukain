@@ -45,11 +45,11 @@
     <color name="gray_alpha_50">#80d9d9de</color>
     <color name="gray_darken_10">#C0C0C5</color>
     <color name="green_alpha_20">#332bde73</color>
-    <color name="green_alpha_50">#802bde73</color>
     <color name="green_darken_10">#12C55A</color>
     <color name="green_darken_20">#00AB40</color>
     <color name="green_lighten_10">#45F88D</color>
     <color name="white_alpha_60">#99ffffff</color>
+    <color name="red_alpha">#7ed71149</color>
 
     <!-- Click colors -->
     <color name="dark_gray_click">#1f000000</color>
