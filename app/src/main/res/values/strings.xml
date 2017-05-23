@@ -28,5 +28,10 @@
     <string name="login_buttons_log_in_email" formatted="false">Log in with email</string>
     <string name="signup_button_email" formatted="false">Sign up with email</string>
 
-    <string name="login_tout_disclaimer_we_never_post_anything_without_permission" formatted="false">We\'ll never post anything without your permission.</string>
+    <string name="login_tout_disclaimer_by_signing_up_you_agree_to_terms_html" formatted="false">By signing up, you
+        agree to our &lt;u>terms of use&lt;/u>, &lt;u>privacy policy&lt;/u>, and &lt;u>cookie policy&lt;/u>.
+    </string>
+    <string name="login_tout_disclaimer_we_never_post_anything_without_permission" formatted="false">We\'ll never post
+        anything without your permission.
+    </string>
 </resources>
