@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +18,6 @@ import android.widget.LinearLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 import in.buka.app.R;
 import in.buka.app.libs.configs.Constants;
@@ -54,6 +53,30 @@ public class LoginActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
 
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!email.getText().toString().equals("") && !password.getText().toString().equals("")) {
+                    login.setEnabled(true);
+                } else {
+                    login.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
+        email.addTextChangedListener(watcher);
+        password.addTextChangedListener(watcher);
+
         login = (Button) findViewById(R.id.login_button);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,18 +87,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        String data = null;
-        try {
-            data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(email.getText().toString(), "UTF-8");
-            data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password.getText().toString(), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
         Intent service = new Intent(this, BLService.class);
         Bundle send = new Bundle();
         send.putString(BLService.KEY_URL, Constants.LOGIN_URL);
-        send.putString(BLService.KEY_DATA, data);
+        send.putString(BLService.KEY_DATA, "");
+        send.putString(BLService.KEY_TYPE, BLService.TYPE_LOGIN);
+        send.putString(BLService.KEY_USERNAME, email.getText().toString());
+        send.putString(BLService.KEY_PASSWORD, password.getText().toString());
         service.putExtras(send);
         startService(service);
         progress = ProgressDialog.show(this, "", "Loading...", true, false);
@@ -94,12 +112,12 @@ public class LoginActivity extends AppCompatActivity {
                 Bundle recv = intent.getExtras();
 
                 JSONObject response = new JSONObject(recv.getString(BLService.KEY_RESPONSE));
-                if (response.getString("message") == null) {
+                if (response.getString("message").equals("null")) {
                     User user = JsonUtils.parseUserCredentials(response);
                     DatabaseHelper helper = new DatabaseHelper(LoginActivity.this);
                     helper.setCredentials(user);
                 } else {
-                    Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_INDEFINITE).show();
+                    Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_LONG).show();
                 }
 
             } catch (JSONException e) {

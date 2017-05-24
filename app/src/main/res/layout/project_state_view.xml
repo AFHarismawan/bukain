@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/project_state_view_group"
-  android:visibility="gone"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="@dimen/grid_7_half">
-
-  <TextView
-    android:id="@+id/successfully_funded_text_view"
-    android:visibility="gone"
-    style="@style/BodyPrimaryMedium"
-    android:textColor="@color/white"
-    android:background="@color/green"
-    android:gravity="center"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/project_state_view_group"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="@dimen/grid_7_half"
+    android:orientation="vertical"
+    android:visibility="gone">
 
-  <TextView
-    android:id="@+id/funding_unsuccessful_text_view"
-    android:visibility="gone"
-    style="@style/BodyPrimaryMedium"
-    android:textColor="@color/white"
-    android:background="@color/dark_gray"
-    android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/successfully_funded_text_view"
+        style="@style/BodyPrimaryMedium"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/green"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/funding_unsuccessful_text_view"
+        style="@style/BodyPrimaryMedium"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_gray"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:visibility="gone" />
 
 </LinearLayout>

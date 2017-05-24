@@ -43,4 +43,10 @@ public class ToutActivity extends AppCompatActivity {
 
     private void gotoLoginFacebook(){
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return false;
+    }
 }

@@ -1,5 +1,6 @@
 package in.buka.app.libs.utils;
 
+import android.util.Base64;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -17,7 +18,47 @@ import in.buka.app.ui.activities.ActivityFeedActivity;
 
 public class HttpUtils {
 
+    public static String sendBasicAuthPOSTRequest(String url, String data, String username, String password) {
+        String credentials = (username + ":" + password);
+        String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+        URL ur;
+        HttpURLConnection conn = null;
+        try {
+            ur = new URL(url);
+            conn = (HttpURLConnection) ur.openConnection();
+            conn.setRequestProperty("Authorization", "Basic " + base64EncodedCredentials);
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
 
+            OutputStreamWriter streamWriter = new OutputStreamWriter(conn.getOutputStream());
+            streamWriter.write(data);
+            streamWriter.flush();
+
+            StringBuilder sb = new StringBuilder();
+            int HttpResult = conn.getResponseCode();
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+                        conn.getInputStream(), "utf-8"));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line).append("\n");
+                }
+                br.close();
+
+                Log.d(ActivityFeedActivity.TAG, sb.toString());
+
+            } else {
+                Log.d(ActivityFeedActivity.TAG, conn.getResponseMessage());
+            }
+
+            return sb.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            conn.disconnect();
+        }
+        return null;
+    }
 
     public static String sendPOSTRequest(String url, String data) {
         URL ur;

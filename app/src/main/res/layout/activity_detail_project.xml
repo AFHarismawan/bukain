@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_height="match_parent"
-android:layout_width="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<include layout="@layout/toolbar"
-         android:id="@+id/project_toolbar" />
+    <include
+        android:id="@+id/project_toolbar"
+        layout="@layout/toolbar" />
 
-<android.support.v7.widget.RecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/project_recycler_view"
-        android:layout_below="@id/project_toolbar"
-        android:layout_above="@+id/project_action_buttons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_gray"/>
+        android:layout_above="@+id/project_action_buttons"
+        android:layout_below="@id/project_toolbar"
+        android:background="@color/light_gray" />
 
-<RelativeLayout
+    <RelativeLayout
         android:id="@+id/project_action_buttons"
-        android:focusable="true"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:focusable="true">
 
-    <Button
-            style="@style/ProjectActionButton"
+        <Button
             android:id="@+id/back_project_button"
-            android:visibility="visible"
+            style="@style/ProjectActionButton"
             android:background="@drawable/button_green"
-            android:text="@string/project_back_button" />
+            android:text="@string/project_back_button"
+            android:visibility="visible" />
 
-    <Button
-            style="@style/ProjectActionButton"
+        <Button
             android:id="@+id/manage_pledge_button"
-            android:visibility="gone"
-            android:background="@drawable/button_blue"
-            android:text="@string/project_manage_button" />
-
-    <Button
             style="@style/ProjectActionButton"
-            android:id="@+id/view_pledge_button"
-            android:visibility="gone"
             android:background="@drawable/button_blue"
-            android:text="@string/project_view_button" />
-</RelativeLayout>
+            android:text="@string/project_manage_button"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/view_pledge_button"
+            style="@style/ProjectActionButton"
+            android:background="@drawable/button_blue"
+            android:text="@string/project_view_button"
+            android:visibility="gone" />
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:ignore="ContentDescription"
-        android:src="@drawable/birthday_banner"/>
+        android:src="@drawable/birthday_banner"
+        tools:ignore="ContentDescription" />
 
 </LinearLayout>

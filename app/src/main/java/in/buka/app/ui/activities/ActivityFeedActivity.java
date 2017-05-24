@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +15,6 @@ import android.view.MenuItem;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -31,9 +29,7 @@ import in.buka.app.ui.adapters.ActivityFeedAdapter;
 
 public class ActivityFeedActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private FirebaseDatabase database;
     private ArrayList<Project> projects = new ArrayList<>();
 
     public static String TAG = "BUKAIN";
@@ -46,8 +42,6 @@ public class ActivityFeedActivity extends AppCompatActivity implements Navigatio
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(R.string.app_name);
-
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_feed_swipe_refresh_layout);
 
         Project.get().addValueEventListener(new ValueEventListener() {
             @Override

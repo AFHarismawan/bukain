@@ -1,96 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:background="@color/light_gray"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.activities.ToutActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical"
+    tools:context=".ui.activities.ToutActivity">
 
     <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <include layout="@layout/toolbar" />
 
         <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:paddingLeft="@dimen/grid_3"
-                android:paddingStart="@dimen/grid_3"
-                android:paddingRight="@dimen/grid_3"
-                android:paddingEnd="@dimen/grid_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/grid_3"
+            android:paddingLeft="@dimen/grid_3"
+            android:paddingRight="@dimen/grid_3"
+            android:paddingStart="@dimen/grid_3">
 
             <ImageView
-                    android:id="@+id/logo"
-                    android:layout_marginTop="@dimen/grid_8"
-                    android:layout_marginBottom="@dimen/grid_6"
-                    android:layout_width="170dp"
-                    android:layout_height="20.06dp"
-                    android:src="@drawable/logo"
-                    android:contentDescription="@string/app_name" />
+                android:id="@+id/logo"
+                android:layout_width="170dp"
+                android:layout_height="20.06dp"
+                android:layout_marginBottom="@dimen/grid_6"
+                android:layout_marginTop="@dimen/grid_8"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/logo" />
 
             <Button
-                    android:id="@+id/facebook_login_button"
-                    style="@style/FacebookButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                android:id="@+id/facebook_login_button"
+                style="@style/FacebookButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <Button
-                    android:id="@+id/google_login_button"
-                    style="@style/GoogleButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                android:id="@+id/google_login_button"
+                style="@style/GoogleButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <TextView
-                    style="@style/CaptionSecondary"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/grid_1"
-                    android:layout_marginLeft="@dimen/grid_2"
-                    android:layout_marginStart="@dimen/grid_2"
-                    android:layout_marginEnd="@dimen/grid_2"
-                    android:layout_marginRight="@dimen/grid_2"
-                    android:text="@string/login_tout_disclaimer_we_never_post_anything_without_permission" />
+                style="@style/CaptionSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/grid_2"
+                android:layout_marginLeft="@dimen/grid_2"
+                android:layout_marginRight="@dimen/grid_2"
+                android:layout_marginStart="@dimen/grid_2"
+                android:layout_marginTop="@dimen/grid_1"
+                android:gravity="center"
+                android:text="@string/login_tout_disclaimer_we_never_post_anything_without_permission" />
 
             <Button
-                    style="@style/BorderButton"
-                    android:id="@+id/login_button"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/grid_3"
-                    android:layout_marginBottom="@dimen/grid_1"
-                    android:text="@string/login_buttons_log_in_email" />
+                android:id="@+id/login_button"
+                style="@style/BorderButton"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/grid_1"
+                android:layout_marginTop="@dimen/grid_3"
+                android:text="@string/login_buttons_log_in_email" />
 
             <Button
-                    style="@style/BorderButton"
-                    android:id="@+id/sign_up_button"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/grid_1"
-                    android:text="@string/signup_button_email" />
+                android:id="@+id/sign_up_button"
+                style="@style/BorderButton"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/grid_1"
+                android:text="@string/signup_button_email" />
 
             <in.buka.app.ui.views.HtmlTextView
-                    style="@style/CaptionSecondary"
-                    android:id="@+id/disclaimer_text_view"
-                    android:background="@drawable/click_indicator_light_masked"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/grid_1"
-                    android:layout_marginBottom="@dimen/grid_2"
-                    android:gravity="center_horizontal"
-                    android:layout_marginLeft="@dimen/grid_1"
-                    android:layout_marginStart="@dimen/grid_1"
-                    android:layout_marginEnd="@dimen/grid_1"
-                    android:layout_marginRight="@dimen/grid_1"
-                    android:paddingLeft="@dimen/grid_1"
-                    android:paddingRight="@dimen/grid_1"
-                    android:paddingTop="@dimen/grid_1"
-                    android:paddingBottom="@dimen/grid_1"
-                    android:text="@string/login_tout_disclaimer_by_signing_up_you_agree_to_terms_html" />
+                android:id="@+id/disclaimer_text_view"
+                style="@style/CaptionSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/grid_2"
+                android:layout_marginEnd="@dimen/grid_1"
+                android:layout_marginLeft="@dimen/grid_1"
+                android:layout_marginRight="@dimen/grid_1"
+                android:layout_marginStart="@dimen/grid_1"
+                android:layout_marginTop="@dimen/grid_1"
+                android:background="@drawable/click_indicator_light_masked"
+                android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/grid_1"
+                android:paddingLeft="@dimen/grid_1"
+                android:paddingRight="@dimen/grid_1"
+                android:paddingTop="@dimen/grid_1"
+                android:text="@string/login_tout_disclaimer_by_signing_up_you_agree_to_terms_html" />
         </LinearLayout>
 
     </LinearLayout>
