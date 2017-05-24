@@ -1,8 +1,11 @@
 package in.buka.app.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import in.buka.app.R;
 import in.buka.app.libs.utils.ProjectUtils;
 import in.buka.app.libs.utils.ViewUtils;
 import in.buka.app.models.Project;
+import in.buka.app.ui.activities.DetailProjectActivity;
 import in.buka.app.ui.viewholders.ProjectViewHolder;
 
 /**
@@ -23,6 +27,7 @@ import in.buka.app.ui.viewholders.ProjectViewHolder;
 
 public class ActivityFeedAdapter extends RecyclerView.Adapter<ProjectViewHolder> {
 
+    public static String KEY_ID = "id";
     private Context context;
     private List<Project> list;
 
@@ -41,11 +46,9 @@ public class ActivityFeedAdapter extends RecyclerView.Adapter<ProjectViewHolder>
 
     @Override
     public void onBindViewHolder(ProjectViewHolder holder, int position) {
-        Project project = list.get(position);
+        final Project project = list.get(position);
 
-        if (project.id != null) {
-            holder.id = project.id;
-        }
+        Log.d("BUKAIN ID", project.id);
 
         if (project.image != null) {
             final int targetImageWidth = (int) (ViewUtils.getScreenWidthDp(context) * ViewUtils.getScreenDensity(context));
@@ -78,6 +81,19 @@ public class ActivityFeedAdapter extends RecyclerView.Adapter<ProjectViewHolder>
         holder.funded.setText(project.funded());
         holder.deadline.setText(ProjectUtils.deadlineCountdownValue(project.deadline));
         holder.deadlineUnit.setText(ProjectUtils.deadlineCountdownDetail(project.deadline, context));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("BUKAIN ID", project.id);
+
+                Intent detail = new Intent(context, DetailProjectActivity.class);
+                Bundle send = new Bundle();
+                send.putString(KEY_ID, project.id);
+                detail.putExtras(send);
+                context.startActivity(detail);
+            }
+        });
     }
 
     @Override
