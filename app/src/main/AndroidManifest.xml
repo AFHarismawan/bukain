@@ -35,6 +35,8 @@
                 android:icon="@drawable/ic_launcher"
                 android:label="@string/bl_service"/>
 
+        <activity android:name=".ui.activities.DetailProjectActivity">
+        </activity>
     </application>
 
 </manifest>

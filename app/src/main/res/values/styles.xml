@@ -141,4 +141,11 @@
     <style name="GreenRoundedButton" parent="RoundedButton">
         <item name="android:background">@drawable/button_green_rounded</item>
     </style>
+
+    <style name="ProjectActionButton" parent="Button">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/project_action_button_height</item>
+        <item name="android:textSize">@dimen/subhead</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
 </resources>

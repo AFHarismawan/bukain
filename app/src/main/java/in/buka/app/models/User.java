@@ -7,16 +7,21 @@ import android.support.annotation.Nullable;
  */
 
 public class User {
+    public int id;
+    public String name;
+    public String token;
+    public String email;
+    public String phone;
+    public String avatar;
+    public String avatar_id;
+    public Bank bank;
+    public String omnikey;
+
     public @Nullable Integer backedProjectsCount;
     public @Nullable Integer createdProjectsCount;
     public @Nullable Boolean gamesNewsletter;
     public @Nullable Boolean happeningNewsletter;
-    public int id;
     public @Nullable String location;
-    public String name;
-    public String token;
-    public String email;
-    public String omnikey;
 
     public void getDataFromBL(){
 

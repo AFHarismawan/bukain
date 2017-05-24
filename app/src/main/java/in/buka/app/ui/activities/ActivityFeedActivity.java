@@ -16,7 +16,6 @@ import android.view.MenuItem;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -50,15 +49,13 @@ public class ActivityFeedActivity extends AppCompatActivity implements Navigatio
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_feed_swipe_refresh_layout);
 
-        database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("projects");
-
-        ref.addValueEventListener(new ValueEventListener() {
+        Project.get().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d(TAG, Long.toString(dataSnapshot.getChildrenCount()));
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    projects.add(postSnapshot.getValue(Project.class));
+                    Project project = postSnapshot.getValue(Project.class);
+                    projects.add(project);
                 }
 
                 runOnUiThread(new Runnable() {
@@ -109,7 +106,7 @@ public class ActivityFeedActivity extends AppCompatActivity implements Navigatio
         int id = item.getItemId();
 
         Intent change;
-        switch (id){
+        switch (id) {
             case R.id.nav_login:
                 change = new Intent(this, ToutActivity.class);
                 startActivity(change);

@@ -34,4 +34,8 @@
     <string name="login_tout_disclaimer_we_never_post_anything_without_permission" formatted="false">We\'ll never post
         anything without your permission.
     </string>
+
+    <string name="project_back_button" formatted="false">Back this project</string>
+    <string name="project_manage_button" formatted="false">Manage pledge</string>
+    <string name="project_view_button" formatted="false">View pledge</string>
 </resources>
