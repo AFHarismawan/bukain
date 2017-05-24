@@ -1,3 +1,8 @@
+/**
+ *  Halaman pertama kali buka APP:
+ *  List Project dengan tabulasi (Baru, Terdanai, Hampir Berakhir dll) dan tombol search
+ **/
+
 package in.buka.app.ui.activities;
 
 import android.support.v4.widget.SwipeRefreshLayout;

@@ -43,6 +43,10 @@ public class ActivityFeedAdapter extends RecyclerView.Adapter<ProjectViewHolder>
     public void onBindViewHolder(ProjectViewHolder holder, int position) {
         Project project = list.get(position);
 
+        if (context != null) {
+            holder.context = context;
+        }
+
         if (project.id != null) {
             holder.id = project.id;
         }
@@ -78,13 +82,6 @@ public class ActivityFeedAdapter extends RecyclerView.Adapter<ProjectViewHolder>
         holder.funded.setText(project.funded());
         holder.deadline.setText(ProjectUtils.deadlineCountdownValue(project.deadline));
         holder.deadlineUnit.setText(ProjectUtils.deadlineCountdownDetail(project.deadline, context));
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
     }
 
     @Override
