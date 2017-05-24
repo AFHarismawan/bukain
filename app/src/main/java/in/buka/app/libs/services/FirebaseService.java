@@ -12,7 +12,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FirebaseService {
     private DatabaseReference dataReference;
     private final static String USERS_PATH = "users";
-    public final static String CONTACTS_PATH = "contacts";
 
     private static class SingletonHolder {
         private static final FirebaseService INSTANCE = new FirebaseService();
@@ -39,29 +38,15 @@ public class FirebaseService {
         return email;
     }
 
-    public DatabaseReference getUserReference(String email){
+    public DatabaseReference getUserReference(String uid){
         DatabaseReference userReference = null;
-        if (email != null) {
-            String emailKey = email.replace(".", "_");
-            userReference = dataReference.getRoot().child(USERS_PATH).child(emailKey);
+        if (uid != null) {
+            userReference = dataReference.getRoot().child(USERS_PATH).child(uid);
         }
         return userReference;
     }
 
     public DatabaseReference getMyUserReference() {
         return getUserReference(getAuthUserEmail());
-    }
-
-    public DatabaseReference getContactsReference(String email){
-        return getUserReference(email).child(CONTACTS_PATH);
-    }
-
-    public DatabaseReference getMyContactsReference(){
-        return getContactsReference(getAuthUserEmail());
-    }
-
-    public DatabaseReference getOneContactReference(String mainEmail, String childEmail){
-        String childKey = childEmail.replace(".","_");
-        return getUserReference(mainEmail).child(CONTACTS_PATH).child(childKey);
     }
 }
