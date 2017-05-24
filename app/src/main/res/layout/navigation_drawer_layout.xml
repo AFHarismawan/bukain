@@ -8,8 +8,8 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <include
-        layout="@layout/activity_feed_layout"
+    <FrameLayout
+        android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -1,7 +1,10 @@
 <resources>
+
     <string name="app_name">Bukain</string>
     <string name="bl_service">BLService</string>
     <string name="font_family_medium">sans-serif-medium</string>
+
+    <!--<string name="connection_error" formatted="false"></string>-->
 
     <string name="navigate_back_label" formatted="false">Navigate back</string>
     <string name="navigation_header_activity" formatted="false">Activity</string>
