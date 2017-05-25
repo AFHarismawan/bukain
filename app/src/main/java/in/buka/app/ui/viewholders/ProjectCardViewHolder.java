@@ -17,13 +17,13 @@ import in.buka.app.ui.activities.DetailProjectActivity;
  * Created by A. Fauzi Harismawan on 06/05/2017.
  */
 
-public class ProjectViewHolder extends RecyclerView.ViewHolder {
+public class ProjectCardViewHolder extends RecyclerView.ViewHolder {
 
     public ImageView projectImage;
     public TextView projectCategory, projectName, projectDesc, backers, funded, deadline, deadlineUnit;
     public ProgressBar percentageFunded;
 
-    public ProjectViewHolder(View itemView) {
+    public ProjectCardViewHolder(View itemView) {
         super(itemView);
         projectImage = (ImageView) itemView.findViewById(R.id.project_image);
         projectCategory = (TextView) itemView.findViewById(R.id.project_category);

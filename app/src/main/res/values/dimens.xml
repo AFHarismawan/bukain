@@ -24,6 +24,15 @@
     <dimen name="grid_35">280dp</dimen>
     <dimen name="grid_40">320dp</dimen>
 
+    <!-- Bukain six-point grid keylines -->
+    <dimen name="grid_new_1">6dp</dimen>
+    <dimen name="grid_new_2">12dp</dimen>
+    <dimen name="grid_new_3">18dp</dimen>
+    <dimen name="grid_new_4">24dp</dimen>
+    <dimen name="grid_new_8">48dp</dimen>
+    <dimen name="grid_new_10">60dp</dimen>
+    <dimen name="grid_new_20">120dp</dimen>
+
     <!-- Cards -->
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
@@ -63,4 +72,21 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <!-- Layout padding -->
+    <dimen name="activity_padding_x">0dp</dimen>
+    <dimen name="comment_body_padding_x">@dimen/grid_7</dimen>
+    <dimen name="feed_padding_y">@dimen/grid_5_half</dimen>
+    <dimen name="feed_padding_x">@dimen/grid_2</dimen>
+    <dimen name="search_padding_y">@dimen/grid_new_2</dimen>
+    <dimen name="search_padding_x">@dimen/grid_new_2</dimen>
+    <dimen name="form_margin_x">@dimen/grid_2</dimen>
+    <dimen name="project_padding_x">@dimen/grid_2</dimen>
+    <dimen name="settings_icon_margin_x">@dimen/grid_1_half</dimen>
+    <dimen name="profile_empty_padding_y">@dimen/grid_8</dimen>
+
+    <dimen name="project_social_photo_height">@dimen/grid_4</dimen>
+    <dimen name="project_avatar_width">@dimen/grid_8</dimen>
+    <dimen name="project_avatar_height">@dimen/grid_8</dimen>
 </resources>

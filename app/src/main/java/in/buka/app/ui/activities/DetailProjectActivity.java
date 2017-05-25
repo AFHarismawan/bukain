@@ -5,26 +5,22 @@
 
 package in.buka.app.ui.activities;
 
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import android.util.Log;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import in.buka.app.R;
 import in.buka.app.models.Project;
 import in.buka.app.ui.adapters.ActivityFeedAdapter;
-import in.buka.app.ui.viewholders.ProjectViewHolder;
+import in.buka.app.ui.adapters.DetailProjectAdapter;
 
 public class DetailProjectActivity extends AppCompatActivity {
 
@@ -45,7 +41,6 @@ public class DetailProjectActivity extends AppCompatActivity {
 
         root = (RelativeLayout) findViewById(R.id.container_detail_project);
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_feed_swipe_refresh_layout);
         projectRecyclerView = (RecyclerView) findViewById(R.id.project_recycler_view);
 
         Bundle bundle = getIntent().getExtras();
@@ -54,7 +49,15 @@ public class DetailProjectActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 project = dataSnapshot.getValue(Project.class);
 
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        projectRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                        DetailProjectAdapter adapter = new DetailProjectAdapter(DetailProjectActivity.this, project);
+                        projectRecyclerView.setAdapter(adapter);
+                        projectRecyclerView.setLayoutManager(new LinearLayoutManager(DetailProjectActivity.this));
+                    }
+                });
             }
 
             @Override

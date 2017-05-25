@@ -41,4 +41,28 @@
     <string name="project_back_button" formatted="false">Back this project</string>
     <string name="project_manage_button" formatted="false">Manage pledge</string>
     <string name="project_view_button" formatted="false">View pledge</string>
+
+    <string name="project_menu_created_by" formatted="false">Created by</string>
+    <string name="project_menu_buttons_campaign" formatted="false">Campaign</string>
+    <string name="project_menu_buttons_updates" formatted="false">Updates</string>
+    <string name="project_menu_buttons_comments" formatted="false">Comments</string>
+
+    <string name="project_creator_youre_a_backer" formatted="false">\u0020• You\'re a backer</string>
+    <string name="backer_icon">backer</string>
+    <string name="discovery_baseball_card_accessibility_category_label" formatted="false">Category</string>
+    <string name="discovery_baseball_card_accessibility_location_label" formatted="false">Location</string>
+    <string name="discovery_baseball_card_stats_backers" formatted="false">backers</string>
+
+    <string name="products_selected_label_you_selected" formatted="false">You selected</string>
+    <string name="products_info_includes" formatted="false">Includes</string>
+    <string name="products_info_all_gone" formatted="false">All gone</string>
+    <string name="products_info_shipping" formatted="false">Shipping</string>
+    <string name="products_info_estimated_delivery" formatted="false">Estimated delivery</string>
+
+    <string name="accessibility_projects_buttons_play_video" formatted="false">Play video</string>
+
+    <string name="local_offer_icon">\ue54e</string>
+    <string name="location_on_icon">\ue0c8</string>
+    <string name="chevron_right_icon">\ue5cc</string>
+    <string name="play_arrow">\ue037</string>
 </resources>
