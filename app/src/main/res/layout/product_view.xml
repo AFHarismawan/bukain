@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/product_view"
+  android:focusable="true"
+  android:foreground="@drawable/click_indicator_light"
+  android:layout_marginTop="@dimen/grid_1"
+  android:layout_marginStart="@dimen/project_padding_x"
+  android:layout_marginLeft="@dimen/project_padding_x"
+  android:layout_marginRight="@dimen/project_padding_x"
+  android:layout_marginEnd="@dimen/project_padding_x"
+  android:layout_marginBottom="@dimen/grid_2"
+  android:layout_height="wrap_content"
+  android:layout_width="match_parent"
+  app:cardBackgroundColor="@color/white"
+  app:cardCornerRadius="@dimen/card_corner_radius"
+  app:cardElevation="1dp"
+  app:cardPreventCornerOverlap="false">
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <LinearLayout
+        android:id="@+id/product_selected_header"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/grid_2"
+        android:paddingStart="@dimen/grid_2"
+        android:paddingRight="@dimen/grid_2"
+        android:paddingEnd="@dimen/grid_2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/grid_7_half"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <TextView
+          style="@style/CaptionSecondaryMedium"
+          android:background="@color/green"
+          android:textColor="@color/white"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:gravity="center"
+          android:paddingLeft="@dimen/grid_3_half"
+          android:paddingRight="@dimen/grid_3_half"
+          android:text="@string/products_selected_label_you_selected" />
+
+      </LinearLayout>
+
+      <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/grid_2">
+
+        <LinearLayout
+          android:orientation="vertical"
+          android:gravity="center_vertical"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+          <TextView
+            style="@style/EditorialSubhead"
+            android:id="@+id/product_minimum_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/product_blue"
+            tools:text="$20 AUD" />
+
+          <TextView
+            style="@style/CaptionSecondary"
+            android:id="@+id/product_usd_conversion_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="About $15 USD" />
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:orientation="vertical"
+          android:paddingTop="@dimen/grid_1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+          <TextView
+            style="@style/Headline"
+            android:id="@+id/product_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/grid_2"
+            android:paddingEnd="@dimen/grid_2"
+            android:paddingTop="@dimen/grid_1"
+            android:maxLines="2"
+            tools:text="Digital bundle" />
+
+          <TextView
+            style="@style/BodyPrimary"
+            android:id="@+id/product_description_text_view"
+            android:paddingTop="@dimen/grid_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="You'll receive a download link to the project, free of DRM!" />
+
+        </LinearLayout>
+
+        <LinearLayout
+          android:id="@+id/product_products_item_section"
+          android:orientation="vertical"
+          android:paddingTop="@dimen/grid_2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+          <TextView
+            style="@style/BodySecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/products_info_includes" />
+
+          <android.support.v7.widget.RecyclerView
+            android:id="@+id/product_products_item_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <include layout="@layout/product_delivery_view" />
+
+        <LinearLayout
+          android:id="@+id/limit_and_backers_section"
+          android:orientation="horizontal"
+          android:paddingTop="@dimen/grid_2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+          <TextView
+            style="@style/BodyPrimaryMedium"
+            android:id="@+id/product_all_gone_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/products_info_all_gone" />
+
+          <TextView
+            style="@style/BodyPrimaryMedium"
+            android:id="@+id/product_limit_and_remaining_text_view"
+            android:textColor="@color/orange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Limited (20 left of 30)" />
+
+          <TextView
+            style="@style/BodyPrimaryMedium"
+            android:id="@+id/product_limit_and_backers_separator_text_view"
+            android:paddingLeft="@dimen/grid_1"
+            android:paddingStart="@dimen/grid_1"
+            android:paddingEnd="@dimen/grid_1"
+            android:paddingRight="@dimen/grid_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="•"
+            tools:ignore="HardcodedText"
+            tools:visibility="visible" />
+
+          <TextView
+            style="@style/BodyPrimaryMedium"
+            android:id="@+id/product_backers_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="25 backers" />
+
+        </LinearLayout>
+
+      </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+      android:id="@+id/product_white_overlay_view"
+      android:visibility="invisible"
+      android:alpha="0.6"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/white" />
+
+  </FrameLayout>
+
+</android.support.v7.widget.CardView>

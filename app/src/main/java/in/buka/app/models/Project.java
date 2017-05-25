@@ -4,6 +4,8 @@ import com.google.firebase.database.DatabaseReference;
 
 import in.buka.app.models.structure.FirebaseModel;
 
+import java.util.List;
+
 /**
  * Created by A. Fauzi Harismawan on 06/05/2017.
  */
@@ -46,5 +48,9 @@ public class Project extends FirebaseModel {
 
     public String funded() {
         return Integer.toString(fundedPercent()) + "%";
+    }
+
+    public List<Product> getProducts() {
+        return null;
     }
 }

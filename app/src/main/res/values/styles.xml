@@ -157,4 +157,13 @@
         <item name="android:textSize">@dimen/subhead</item>
         <item name="android:fontFamily">@string/font_family_medium</item>
     </style>
+
+    <style name="EditorialHeadline" parent="TextPrimary">
+        <item name="android:textSize">@dimen/editorial_headline</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+
+    <style name="EditorialSubhead" parent="TextPrimary">
+        <item name="android:textSize">@dimen/editorial_subhead</item>
+    </style>
 </resources>

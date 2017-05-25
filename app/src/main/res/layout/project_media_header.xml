@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  tools:ignore="MergeRootFrame">
+
+  <ImageView
+    android:id="@+id/project_photo"
+    android:scaleType="centerCrop"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gray_gradient"
+    android:adjustViewBounds="true"
+    tools:ignore="ContentDescription" />
+
+  <ImageView
+    android:id="@+id/play_button_overlay"
+    android:background="@drawable/video_button_background"
+    android:contentDescription="@string/accessibility_projects_buttons_play_video"
+    android:focusable="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="14dp"
+    android:textSize="40sp"
+    android:text="@string/play_arrow"
+    android:textColor="@color/white"
+    android:visibility="gone" />
+</FrameLayout>
