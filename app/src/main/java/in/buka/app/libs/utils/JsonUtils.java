@@ -26,4 +26,18 @@ public class JsonUtils {
         }
         return null;
     }
+
+    public static User parseUserProfile(JSONObject json) {
+        try {
+            JSONObject jsonObject = json.getJSONObject("user");
+            User user = new User();
+            user.name = jsonObject.getString("name");
+            user.avatar = jsonObject.getString("avatar");
+
+            return user;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

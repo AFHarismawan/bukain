@@ -15,7 +15,7 @@ import in.buka.app.libs.utils.HttpUtils;
 public class BLService extends Service {
 
     public static String KEY_TYPE = "type";
-    public static String TYPE_LOGIN = "login";
+    public static String TYPE_AUTH = "auth";
 
     public static String KEY_URL = "url";
     public static String KEY_DATA = "data";
@@ -33,7 +33,7 @@ public class BLService extends Service {
                 Bundle recv = intent.getExtras();
                 String url = recv.getString(KEY_URL);
                 String data = recv.getString(KEY_DATA);
-                if (recv.getString(KEY_TYPE).equals(TYPE_LOGIN)) {
+                if (recv.getString(KEY_TYPE).equals(TYPE_AUTH)) {
                     String username = recv.getString(KEY_USERNAME);
                     String password = recv.getString(KEY_PASSWORD);
                     response = HttpUtils.sendBasicAuthPOSTRequest(url, data, username, password);

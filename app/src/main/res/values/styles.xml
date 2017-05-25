@@ -17,6 +17,10 @@
 
     </style>
 
+    <style name="ToolbarWhite" parent="ToolbarBase" >
+        <item name="android:background">@color/light_gray</item>
+    </style>
+
     <style name="Toolbar" parent="ToolbarBase" />
 
     <style name="ProgressBar" parent="Base.Widget.AppCompat.ProgressBar">
@@ -39,6 +43,11 @@
 
     <style name="Headline" parent="TextPrimary">
         <item name="android:textSize">@dimen/headline</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+
+    <style name="EditorialHeadline" parent="TextPrimary">
+        <item name="android:textSize">@dimen/editorial_headline</item>
         <item name="android:fontFamily">@string/font_family_medium</item>
     </style>
 

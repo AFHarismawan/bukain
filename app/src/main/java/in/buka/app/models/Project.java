@@ -1,9 +1,7 @@
 package in.buka.app.models;
 
-import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 import in.buka.app.models.structure.FirebaseModel;
 
 /**

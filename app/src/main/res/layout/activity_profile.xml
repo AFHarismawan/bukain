@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <include layout="@layout/toolbar_white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/grid_2">
+
+                <ImageView
+                    android:id="@+id/avatar_image_view"
+                    android:layout_width="@dimen/profile_avatar_width"
+                    android:layout_height="@dimen/profile_avatar_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/grid_1"
+                    android:layout_marginTop="@dimen/grid_2"
+                    android:background="@drawable/avatar_stroke"
+                    android:scaleType="centerCrop"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/user_name_text_view"
+                    style="@style/EditorialHeadline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:paddingLeft="@dimen/grid_3"
+                    android:paddingRight="@dimen/grid_3"
+                    android:text="Haris" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/grid_1"
+                    android:paddingRight="@dimen/grid_1">
+
+                    <TextView
+                        android:id="@+id/created_text_view"
+                        style="@style/SubheadPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/grid_1_half"
+                        android:paddingLeft="@dimen/grid_1_half"
+                        android:paddingRight="@dimen/grid_1_half"
+                        android:paddingStart="@dimen/grid_1_half"
+                        android:text="@string/profile_projects_created_projects"
+                        android:textColor="@color/text_secondary" />
+
+                    <TextView
+                        android:id="@+id/created_count_text_view"
+                        style="@style/SubheadPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/grid_1_half"
+                        android:layout_marginRight="@dimen/grid_1_half"
+                        tools:text="0" />
+
+                    <View
+                        android:id="@+id/divider_view"
+                        android:layout_width="1dp"
+                        android:layout_height="@dimen/grid_2"
+                        android:layout_marginEnd="@dimen/grid_1"
+                        android:layout_marginLeft="@dimen/grid_1"
+                        android:layout_marginRight="@dimen/grid_1"
+                        android:layout_marginStart="@dimen/grid_1"
+                        android:layout_marginTop="3dp"
+                        android:background="@color/black_alpha_10" />
+
+                    <TextView
+                        android:id="@+id/backed_text_view"
+                        style="@style/SubheadPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/grid_1_half"
+                        android:paddingLeft="@dimen/grid_1_half"
+                        android:paddingRight="@dimen/grid_1_half"
+                        android:paddingStart="@dimen/grid_1_half"
+                        android:text="@string/profile_projects_backed_projects"
+                        android:textColor="@color/text_secondary" />
+
+                    <TextView
+                        android:id="@+id/backed_count_text_view"
+                        style="@style/SubheadPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="0" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/grid_3"
+        android:paddingLeft="@dimen/grid_2"
+        android:paddingStart="@dimen/grid_2"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:ignore="RtlSymmetry" />
+
+</LinearLayout>

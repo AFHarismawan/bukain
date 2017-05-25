@@ -6,6 +6,8 @@
 
     <!--<string name="connection_error" formatted="false"></string>-->
 
+    <string name="profile" formatted="false">Profile</string>
+    <string name="auth_failed" formatted="false">Register firebase failed!</string>
     <string name="navigate_back_label" formatted="false">Navigate back</string>
     <string name="navigation_header_activity" formatted="false">Activity</string>
     <string name="stats_funded" formatted="false">funded</string>
@@ -37,6 +39,8 @@
     <string name="login_tout_disclaimer_we_never_post_anything_without_permission" formatted="false">We\'ll never post
         anything without your permission.
     </string>
+    <string name="profile_projects_created_projects" formatted="false">Created projects</string>
+    <string name="profile_projects_backed_projects" formatted="false">Backed projects</string>
 
     <string name="project_back_button" formatted="false">Back this project</string>
     <string name="project_manage_button" formatted="false">Manage pledge</string>

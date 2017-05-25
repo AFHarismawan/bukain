@@ -10,5 +10,5 @@ public class Constants {
     public static String LOGIN_GOOGLE_URL = "https://api.bukalapak.com/v2/google_login.json";
     public static String LOGIN_FACEBOOK_URL = "https://api.bukalapak.com/v2/facebook_loginv2.json";
 
-
+    public static String PROFILE_URL = "https://api.bukalapak.com/v2/users/info.json";
 }

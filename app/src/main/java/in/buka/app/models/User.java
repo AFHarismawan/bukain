@@ -2,11 +2,18 @@ package in.buka.app.models;
 
 import android.support.annotation.Nullable;
 
+import com.google.firebase.database.DatabaseReference;
+
+import in.buka.app.models.structure.FirebaseModel;
+
 /**
  * Created by Shade on 5/22/17.
  */
 
-public class User {
+public class User extends FirebaseModel{
+
+    private static String table = "users";
+
     public int id;
     public String name;
     public String token;
@@ -25,5 +32,13 @@ public class User {
 
     public void getDataFromBL(){
 
+    }
+
+    public static DatabaseReference get(String id) {
+        return firebase.getReference(table).child(id);
+    }
+
+    public static DatabaseReference get() {
+        return firebase.getReference(table);
     }
 }

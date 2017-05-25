@@ -6,15 +6,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,11 +48,37 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private ProgressDialog progress;
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        initView();
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d("BUKAIN", "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d("BUKAIN", "onAuthStateChanged:signed_out");
+                }
+            }
+        };
+    }
+
+    private FirebaseUser getFirebaseUser() {
+        return FirebaseAuth.getInstance().getCurrentUser();
+    }
+
+    private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -91,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
         Bundle send = new Bundle();
         send.putString(BLService.KEY_URL, Constants.LOGIN_URL);
         send.putString(BLService.KEY_DATA, "");
-        send.putString(BLService.KEY_TYPE, BLService.TYPE_LOGIN);
+        send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
         send.putString(BLService.KEY_USERNAME, email.getText().toString());
         send.putString(BLService.KEY_PASSWORD, password.getText().toString());
         service.putExtras(send);
@@ -99,10 +136,32 @@ public class LoginActivity extends AppCompatActivity {
         progress = ProgressDialog.show(this, "", "Loading...", true, false);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return false;
+    private void registerFirebaseUser(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d("BUKAIN", "createUserWithEmail:onComplete:" + task.isSuccessful());
+                        if (!task.isSuccessful()) {
+                            Snackbar.make(root, R.string.auth_failed, Snackbar.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
+    private void signInFirebaseUser(final String email, final String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d("BUKAIN", "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        if (!task.isSuccessful()) {
+                            Log.w("BUKAIN", "signInWithEmail:failed", task.getException());
+                            //@// TODO: 24/05/2017 : iki lo ul
+                        }
+                    }
+                });
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -116,6 +175,21 @@ public class LoginActivity extends AppCompatActivity {
                     User user = JsonUtils.parseUserCredentials(response);
                     DatabaseHelper helper = new DatabaseHelper(LoginActivity.this);
                     helper.setCredentials(user);
+
+                    User.get(Integer.toString(user.id)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            dataSnapshot.getValue(User.class);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                    signInFirebaseUser(email.getText().toString(), user.token);
                 } else {
                     Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_LONG).show();
                 }
@@ -131,11 +205,21 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver(receiver, new IntentFilter("in.buka.app.REQUEST_COMPLETE"));
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return false;
     }
 }

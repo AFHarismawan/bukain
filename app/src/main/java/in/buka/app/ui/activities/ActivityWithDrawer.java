@@ -7,16 +7,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+
 import in.buka.app.R;
+import in.buka.app.libs.database.DatabaseHelper;
 
 /**
  * Created by Shade on 5/24/17.
  */
 
 class ActivityWithDrawer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     protected void setContent(int resource) {
         FrameLayout container = (FrameLayout) findViewById(R.id.main_container);
         View view = getLayoutInflater().inflate(resource, null, false);
@@ -35,9 +40,20 @@ class ActivityWithDrawer extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        navigationView.getMenu().clear();
-        navigationView.inflateMenu(R.menu.activity_feed_logged_drawer);
-        navigationView.setCheckedItem(R.id.nav_all_project);
+        DatabaseHelper helper = new DatabaseHelper(this);
+        if (helper.getCredentials().name != null) {
+            Log.d("TOKEN", helper.getCredentials().token);
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.activity_feed_logged_drawer);
+            Menu menu = navigationView.getMenu();
+            MenuItem item = menu.findItem(R.id.nav_login);
+            item.setTitle(helper.getCredentials().name);
+
+            navigationView.setCheckedItem(R.id.nav_all_project);
+        } else {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.activity_feed_drawer);
+        }
     }
 
     @Override
