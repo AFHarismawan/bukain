@@ -34,6 +34,7 @@ import in.buka.app.R;
 import in.buka.app.libs.configs.Constants;
 import in.buka.app.libs.database.DatabaseHelper;
 import in.buka.app.libs.services.BLService;
+import in.buka.app.libs.utils.HttpUtils;
 import in.buka.app.libs.utils.JsonUtils;
 import in.buka.app.models.User;
 
@@ -129,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         send.putString(BLService.KEY_URL, Constants.LOGIN_URL);
         send.putString(BLService.KEY_DATA, "");
         send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
+        send.putString(BLService.KEY_REQUEST, HttpUtils.POST_REQUEST);
         send.putString(BLService.KEY_USERNAME, email.getText().toString());
         send.putString(BLService.KEY_PASSWORD, password.getText().toString());
         service.putExtras(send);
@@ -172,14 +174,21 @@ public class LoginActivity extends AppCompatActivity {
 
                 JSONObject response = new JSONObject(recv.getString(BLService.KEY_RESPONSE));
                 if (response.getString("message").equals("null")) {
-                    User user = JsonUtils.parseUserCredentials(response);
+                    final User user = JsonUtils.parseUserCredentials(response);
                     DatabaseHelper helper = new DatabaseHelper(LoginActivity.this);
                     helper.setCredentials(user);
 
                     User.get(Integer.toString(user.id)).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            dataSnapshot.getValue(User.class);
+                            User temp = dataSnapshot.getValue(User.class);
+                            if (temp != null) {
+                                Log.d("BUKAIN", "NOT NULL");
+                                signInFirebaseUser(temp.email, temp.token);
+                            } else {
+                                Log.d("BUKAIN", "NULL");
+                                registerFirebaseUser(user.email, user.token);
+                            }
                         }
 
                         @Override
@@ -187,9 +196,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                     });
-
-
-                    signInFirebaseUser(email.getText().toString(), user.token);
                 } else {
                     Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_LONG).show();
                 }

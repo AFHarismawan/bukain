@@ -22,6 +22,8 @@ import in.buka.app.libs.database.DatabaseHelper;
 
 class ActivityWithDrawer extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private DatabaseHelper helper;
+
     protected void setContent(int resource) {
         FrameLayout container = (FrameLayout) findViewById(R.id.main_container);
         View view = getLayoutInflater().inflate(resource, null, false);
@@ -40,7 +42,7 @@ class ActivityWithDrawer extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        DatabaseHelper helper = new DatabaseHelper(this);
+        helper = new DatabaseHelper(this);
         if (helper.getCredentials().name != null) {
             Log.d("TOKEN", helper.getCredentials().token);
             navigationView.getMenu().clear();
@@ -64,8 +66,13 @@ class ActivityWithDrawer extends AppCompatActivity implements NavigationView.OnN
         Intent change;
         switch (id) {
             case R.id.nav_login:
-                change = new Intent(this, ToutActivity.class);
-                startActivity(change);
+                if (helper.getCredentials().name != null) {
+                    change = new Intent(this, ProfileActivity.class);
+                    startActivity(change);
+                } else {
+                    change = new Intent(this, ToutActivity.class);
+                    startActivity(change);
+                }
                 break;
         }
 

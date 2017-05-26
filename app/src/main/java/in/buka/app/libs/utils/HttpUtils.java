@@ -18,7 +18,10 @@ import in.buka.app.ui.activities.ActivityFeedActivity;
 
 public class HttpUtils {
 
-    public static String sendBasicAuthPOSTRequest(String url, String data, String username, String password) {
+    public static String GET_REQUEST = "GET";
+    public static String POST_REQUEST = "POST";
+
+    public static String sendBasicAuthRequest(String url, String type, String data, String username, String password) {
         String credentials = (username + ":" + password);
         String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
         URL ur;
@@ -28,7 +31,7 @@ public class HttpUtils {
             conn = (HttpURLConnection) ur.openConnection();
             conn.setRequestProperty("Authorization", "Basic " + base64EncodedCredentials);
             conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
+            conn.setRequestMethod(type);
 
             OutputStreamWriter streamWriter = new OutputStreamWriter(conn.getOutputStream());
             streamWriter.write(data);

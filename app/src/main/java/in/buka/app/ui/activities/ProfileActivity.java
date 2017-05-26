@@ -9,7 +9,12 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.LinearLayout;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,7 +23,9 @@ import in.buka.app.R;
 import in.buka.app.libs.configs.Constants;
 import in.buka.app.libs.database.DatabaseHelper;
 import in.buka.app.libs.services.BLService;
+import in.buka.app.libs.utils.HttpUtils;
 import in.buka.app.libs.utils.JsonUtils;
+import in.buka.app.models.Project;
 import in.buka.app.models.User;
 
 /**
@@ -45,18 +52,37 @@ public class ProfileActivity extends AppCompatActivity {
 
         root = (LinearLayout) findViewById(R.id.container_profile);
 
-        getData();
+        getUserData();
     }
 
-    private void getData() {
+    private void getProjectData() {
+        Project.get().orderByChild("uid").equalTo(user.id).addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("BUKAIN", dataSnapshot.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void getUserData() {
+        Intent service = new Intent(this, BLService.class);
         DatabaseHelper helper = new DatabaseHelper(this);
         User user = helper.getCredentials();
         Bundle send = new Bundle();
         send.putString(BLService.KEY_URL, Constants.PROFILE_URL);
         send.putString(BLService.KEY_DATA, "");
         send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
+        send.putString(BLService.KEY_REQUEST, HttpUtils.GET_REQUEST);
         send.putString(BLService.KEY_USERNAME, Integer.toString(user.id));
         send.putString(BLService.KEY_PASSWORD, user.token);
+        service.putExtras(send);
+        startService(service);
         progress = ProgressDialog.show(this, "", "Loading...", true, false);
     }
 
@@ -69,7 +95,9 @@ public class ProfileActivity extends AppCompatActivity {
                 JSONObject response = new JSONObject(recv.getString(BLService.KEY_RESPONSE));
                 if (response.getString("message").equals("null")) {
                     user = JsonUtils.parseUserProfile(response);
-
+                    Log.d("BUKAIN", user.id + "");
+                    Log.d("BUKAIN", response.toString());
+                    getProjectData();
                 } else {
                     Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_LONG).show();
                 }

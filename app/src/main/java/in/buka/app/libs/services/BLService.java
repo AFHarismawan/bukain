@@ -22,6 +22,7 @@ public class BLService extends Service {
     public static String KEY_USERNAME = "username";
     public static String KEY_PASSWORD = "password";
     public static String KEY_RESPONSE = "response";
+    public static String KEY_REQUEST = "request";
 
     @Override
     public int onStartCommand(final Intent intent,  int flags, int startId) {
@@ -33,10 +34,11 @@ public class BLService extends Service {
                 Bundle recv = intent.getExtras();
                 String url = recv.getString(KEY_URL);
                 String data = recv.getString(KEY_DATA);
+                String request = recv.getString(KEY_REQUEST);
                 if (recv.getString(KEY_TYPE).equals(TYPE_AUTH)) {
                     String username = recv.getString(KEY_USERNAME);
                     String password = recv.getString(KEY_PASSWORD);
-                    response = HttpUtils.sendBasicAuthPOSTRequest(url, data, username, password);
+                    response = HttpUtils.sendBasicAuthRequest(url, request, data, username, password);
                 }
                 return null;
             }
