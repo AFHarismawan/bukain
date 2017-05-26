@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import in.buka.app.libs.configs.Constants;
 
@@ -21,17 +22,41 @@ public class HttpUtils {
     public static String GET_REQUEST = "GET";
     public static String POST_REQUEST = "POST";
 
-    public static String sendBasicAuthRequest(String url, String type, String data, String username, String password) {
-        String credentials = (username + ":" + password);
-        String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+    private HttpURLConnection conn = null;
+    public final String WEB_SERVER = Constants.SERVER_URL;
+    public final int TIMEOUT = 10000;
+
+    private static class SingletonHolder {
+        private static final HttpUtils INSTANCE = new HttpUtils();
+    }
+
+    public static HttpUtils getInstance() {
+        return HttpUtils.SingletonHolder.INSTANCE;
+    }
+
+    public String  invoke(String method, String uri, String query) {
+        return invokeWithAuth(method, uri, query, null, null);
+    }
+
+    public String invokeWithAuth(String method, String uri, String query, String username, String token) {
+        String result = null;
         URL ur;
-        HttpURLConnection conn = null;
         try {
-            ur = new URL(url);
+            ur = new URL(WEB_SERVER + uri);
             conn = (HttpURLConnection) ur.openConnection();
-            conn.setRequestProperty("Authorization", "Basic " + base64EncodedCredentials);
-            conn.setConnectTimeout(10000);
-            conn.setRequestMethod(type);
+
+            if(username != null) {
+                String credentials = (username + ":" + token);
+                String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+                conn.setRequestProperty("Authorization", "Basic " + base64EncodedCredentials);
+            }
+
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestMethod(method);
+
+            conn.setReadTimeout(TIMEOUT);
+            conn.setConnectTimeout(TIMEOUT);
 
             if (type.equals(POST_REQUEST)) {
                 conn.setDoOutput(true);
@@ -39,25 +64,21 @@ public class HttpUtils {
                 streamWriter.write(data);
                 streamWriter.flush();
             }
+            OutputStreamWriter streamWriter = new OutputStreamWriter(conn.getOutputStream());
+            streamWriter.write(query);
+            streamWriter.flush();
 
-            StringBuilder sb = new StringBuilder();
-            int HttpResult = conn.getResponseCode();
-            if (HttpResult == HttpURLConnection.HTTP_OK) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(
-                        conn.getInputStream(), "utf-8"));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line).append("\n");
-                }
-                br.close();
+            int status = conn.getResponseCode();
 
-                Log.d(Constants.TAG, sb.toString());
-
+            if (status >= 200 && status < 300) {
+                result = readStream(conn.getInputStream());
             } else {
-                Log.d(Constants.TAG, conn.getResponseMessage());
+                Log.d(ActivityFeedActivity.TAG, conn.getResponseMessage());
+//                result = readStream(conn.getErrorStream());
             }
 
-            return sb.toString();
+            return result;
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -66,6 +87,15 @@ public class HttpUtils {
         return null;
     }
 
+    private String readStream(InputStream is) throws IOException {
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("US-ASCII")));
+        StringBuilder total = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            total.append(line);
+        }
+        if (reader != null) {
+            reader.close();
     public static String sendPOSTRequest(String url, String data) {
         URL ur;
         HttpURLConnection conn = null;
@@ -102,6 +132,6 @@ public class HttpUtils {
         } finally {
             conn.disconnect();
         }
-        return null;
+        return total.toString();
     }
 }

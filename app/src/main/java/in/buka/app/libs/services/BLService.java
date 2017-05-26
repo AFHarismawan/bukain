@@ -6,8 +6,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import in.buka.app.libs.database.DatabaseHelper;
 import in.buka.app.libs.configs.Constants;
 import in.buka.app.libs.utils.HttpUtils;
+import in.buka.app.models.User;
 
 /**
  * Created by A. Fauzi Harismawan on 22/05/2017.
@@ -15,8 +17,12 @@ import in.buka.app.libs.utils.HttpUtils;
 
 public class BLService extends Service {
 
+    private HttpUtils api = HttpUtils.getInstance();
+
     public static String KEY_TYPE = "type";
+    public static String TYPE_LOGIN = "login";
     public static String TYPE_AUTH = "auth";
+    public static String TYPE_NO_AUTH = "no-auth";
 
     public static String KEY_URL = "url";
     public static String KEY_DATA = "data";
@@ -26,7 +32,7 @@ public class BLService extends Service {
     public static String KEY_REQUEST = "request";
 
     @Override
-    public int onStartCommand(final Intent intent,  int flags, int startId) {
+    public int onStartCommand(final Intent intent, int flags, int startId) {
         new AsyncTask<Void, Void, Void>() {
             String response;
 
@@ -36,11 +42,22 @@ public class BLService extends Service {
                 String url = recv.getString(KEY_URL);
                 String data = recv.getString(KEY_DATA);
                 String request = recv.getString(KEY_REQUEST);
-                if (recv.getString(KEY_TYPE).equals(TYPE_AUTH)) {
+
+                if (recv.getString(KEY_TYPE).equals(TYPE_LOGIN)) {
                     String username = recv.getString(KEY_USERNAME);
                     String password = recv.getString(KEY_PASSWORD);
-                    response = HttpUtils.sendBasicAuthRequest(url, request, data, username, password);
+                    response = api.invokeWithAuth(request, url, data, username, password);
+                } else if (recv.getString(KEY_TYPE).equals(TYPE_AUTH)) {
+                    DatabaseHelper helper = new DatabaseHelper(BLService.this);
+                    User user = helper.getCredentials();
+
+                    String username = Integer.toString(user.id);
+                    String password = user.token;
+                    response = api.invokeWithAuth(request, url, data, username, password);
+                } else {
+                    response = api.invoke(request, url, data);
                 }
+
                 return null;
             }
 

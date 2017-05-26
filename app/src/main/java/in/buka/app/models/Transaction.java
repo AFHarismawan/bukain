@@ -1,12 +1,10 @@
 package in.buka.app.models;
 
-import in.buka.app.libs.services.BLService;
-
 /**
  * Created by Shade on 5/23/17.
  */
 
-public class Product {
+public class Transaction {
 
     public String id;
     public String category;
@@ -26,9 +24,9 @@ public class Product {
     public String[] state;
     public String[] product_sin;
 
-    public Product(String id){
+    public Transaction(String id){
         // TODO: 5/26/17 Panggil service helper untuk mengambil data product dari BL.
     }
 
-
+    
 }
