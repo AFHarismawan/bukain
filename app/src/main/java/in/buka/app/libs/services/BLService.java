@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import in.buka.app.libs.configs.Constants;
 import in.buka.app.libs.utils.HttpUtils;
 
 /**
@@ -47,7 +48,7 @@ public class BLService extends Service {
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 //send broadcast
-                Intent i = new Intent("in.buka.app.REQUEST_COMPLETE");
+                Intent i = new Intent(Constants.REQUEST_COMPLETE_INTENT_FILTER);
                 Bundle send = new Bundle();
                 send.putString(KEY_RESPONSE, response);
                 i.putExtras(send);

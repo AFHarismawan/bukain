@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import in.buka.app.ui.activities.ActivityFeedActivity;
+import in.buka.app.libs.configs.Constants;
 
 /**
  * Created by A. Fauzi Harismawan on 22/05/2017.
@@ -30,12 +30,15 @@ public class HttpUtils {
             ur = new URL(url);
             conn = (HttpURLConnection) ur.openConnection();
             conn.setRequestProperty("Authorization", "Basic " + base64EncodedCredentials);
-            conn.setDoOutput(true);
+            conn.setConnectTimeout(10000);
             conn.setRequestMethod(type);
 
-            OutputStreamWriter streamWriter = new OutputStreamWriter(conn.getOutputStream());
-            streamWriter.write(data);
-            streamWriter.flush();
+            if (type.equals(POST_REQUEST)) {
+                conn.setDoOutput(true);
+                OutputStreamWriter streamWriter = new OutputStreamWriter(conn.getOutputStream());
+                streamWriter.write(data);
+                streamWriter.flush();
+            }
 
             StringBuilder sb = new StringBuilder();
             int HttpResult = conn.getResponseCode();
@@ -48,10 +51,10 @@ public class HttpUtils {
                 }
                 br.close();
 
-                Log.d(ActivityFeedActivity.TAG, sb.toString());
+                Log.d(Constants.TAG, sb.toString());
 
             } else {
-                Log.d(ActivityFeedActivity.TAG, conn.getResponseMessage());
+                Log.d(Constants.TAG, conn.getResponseMessage());
             }
 
             return sb.toString();
@@ -87,10 +90,10 @@ public class HttpUtils {
                 }
                 br.close();
 
-                Log.d(ActivityFeedActivity.TAG, sb.toString());
+                Log.d(Constants.TAG, sb.toString());
 
             } else {
-                Log.d(ActivityFeedActivity.TAG, conn.getResponseMessage());
+                Log.d(Constants.TAG, conn.getResponseMessage());
             }
 
             return sb.toString();

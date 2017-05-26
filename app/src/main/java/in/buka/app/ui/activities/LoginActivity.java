@@ -66,10 +66,10 @@ public class LoginActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d("BUKAIN", "onAuthStateChanged:signed_in:" + user.getUid());
+                    Log.d(Constants.TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
-                    Log.d("BUKAIN", "onAuthStateChanged:signed_out");
+                    Log.d(Constants.TAG, "onAuthStateChanged:signed_out");
                 }
             }
         };
@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("BUKAIN", "createUserWithEmail:onComplete:" + task.isSuccessful());
+                        Log.d(Constants.TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
                             Snackbar.make(root, R.string.auth_failed, Snackbar.LENGTH_LONG).show();
                         }
@@ -156,10 +156,10 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("BUKAIN", "signInWithEmail:onComplete:" + task.isSuccessful());
+                        Log.d(Constants.TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
                         if (!task.isSuccessful()) {
-                            Log.w("BUKAIN", "signInWithEmail:failed", task.getException());
+                            Log.w(Constants.TAG, "signInWithEmail:failed", task.getException());
                             //@// TODO: 24/05/2017 : iki lo ul
                         }
                     }
@@ -183,10 +183,10 @@ public class LoginActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             User temp = dataSnapshot.getValue(User.class);
                             if (temp != null) {
-                                Log.d("BUKAIN", "NOT NULL");
+                                Log.d(Constants.TAG, "NOT NULL");
                                 signInFirebaseUser(temp.email, temp.token);
                             } else {
-                                Log.d("BUKAIN", "NULL");
+                                Log.d(Constants.TAG, "NULL");
                                 registerFirebaseUser(user.email, user.token);
                             }
                         }
@@ -210,7 +210,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(receiver, new IntentFilter("in.buka.app.REQUEST_COMPLETE"));
+        registerReceiver(receiver, new IntentFilter(Constants.REQUEST_COMPLETE_INTENT_FILTER));
         mAuth.addAuthStateListener(mAuthListener);
     }
 

@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import in.buka.app.R;
+import in.buka.app.libs.configs.Constants;
 import in.buka.app.models.Project;
 import in.buka.app.ui.adapters.ActivityFeedAdapter;
 
@@ -29,8 +30,6 @@ public class ActivityFeedActivity extends ActivityWithDrawer {
     private RecyclerView recyclerView;
     private ArrayList<Project> projects = new ArrayList<>();
 
-    public static String TAG = "BUKAIN";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +40,7 @@ public class ActivityFeedActivity extends ActivityWithDrawer {
         Project.get().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, Long.toString(dataSnapshot.getChildrenCount()));
+                Log.d(Constants.TAG, Long.toString(dataSnapshot.getChildrenCount()));
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Project project = postSnapshot.getValue(Project.class);
                     project.id = dataSnapshot.getKey();
@@ -55,7 +54,7 @@ public class ActivityFeedActivity extends ActivityWithDrawer {
                     ActivityFeedAdapter adapter = new ActivityFeedAdapter(ActivityFeedActivity.this, projects);
                     recyclerView.setAdapter(adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(ActivityFeedActivity.this));
-                    Log.d(TAG, Integer.toString(projects.size()));
+                    Log.d(Constants.TAG, Integer.toString(projects.size()));
                     }
                 });
             }
