@@ -72,15 +72,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void getUserData() {
         Intent service = new Intent(this, BLService.class);
-        DatabaseHelper helper = new DatabaseHelper(this);
-        User user = helper.getCredentials();
         Bundle send = new Bundle();
         send.putString(BLService.KEY_URL, Constants.PROFILE_URL);
         send.putString(BLService.KEY_DATA, "");
         send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
         send.putString(BLService.KEY_REQUEST, HttpUtils.GET_REQUEST);
-        send.putString(BLService.KEY_USERNAME, Integer.toString(user.id));
-        send.putString(BLService.KEY_PASSWORD, user.token);
         service.putExtras(send);
         startService(service);
         progress = ProgressDialog.show(this, "", "Loading...", true, false);

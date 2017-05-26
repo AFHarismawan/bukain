@@ -14,6 +14,7 @@ import in.buka.app.libs.utils.ProjectUtils;
 import in.buka.app.libs.utils.ViewUtils;
 import in.buka.app.models.Product;
 import in.buka.app.models.Project;
+import in.buka.app.models.User;
 import in.buka.app.ui.activities.DetailCampaignProjectActivity;
 import in.buka.app.ui.viewholders.ProductViewHolder;
 import in.buka.app.ui.viewholders.ProjectDetailViewHolder;
@@ -32,12 +33,12 @@ public class DetailProjectAdapter extends RecyclerView.Adapter<RecyclerView.View
     public static String KEY_ID = "id";
     private Context context;
     private Project project;
+    private User creator;
     private List<Product> products;
 
     public DetailProjectAdapter(Context context, Project project) {
         this.context = context;
         this.project = project;
-        this.products = project.getProducts();
     }
 
     @Override
@@ -98,11 +99,6 @@ public class DetailProjectAdapter extends RecyclerView.Adapter<RecyclerView.View
                     @Override
                     public void onClick(View view) {
 
-                        Intent detail = new Intent(context, DetailCampaignProjectActivity.class);
-                        Bundle send = new Bundle();
-                        send.putString(KEY_ID, project.id);
-                        detail.putExtras(send);
-                        context.startActivity(detail);
                     }
                 });
                 break;

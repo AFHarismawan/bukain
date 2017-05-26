@@ -20,6 +20,7 @@ public class Project extends FirebaseModel {
     public long funded, modal;
     public int backers;
     public long deadline;
+    public List<Integer> products;
 
     //static methods
     public static DatabaseReference get(String id) {
@@ -48,9 +49,5 @@ public class Project extends FirebaseModel {
 
     public String funded() {
         return Integer.toString(fundedPercent()) + "%";
-    }
-
-    public List<Product> getProducts() {
-        return null;
     }
 }

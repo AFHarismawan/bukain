@@ -27,6 +27,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import in.buka.app.libs.services.FirebaseService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,34 +50,15 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private ProgressDialog progress;
 
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseService firebaseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        firebaseService = FirebaseService.getInstance();
         setContentView(R.layout.activity_login);
 
         initView();
-
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d("BUKAIN", "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d("BUKAIN", "onAuthStateChanged:signed_out");
-                }
-            }
-        };
-    }
-
-    private FirebaseUser getFirebaseUser() {
-        return FirebaseAuth.getInstance().getCurrentUser();
     }
 
     private void initView() {
@@ -129,41 +111,13 @@ public class LoginActivity extends AppCompatActivity {
         Bundle send = new Bundle();
         send.putString(BLService.KEY_URL, Constants.LOGIN_URL);
         send.putString(BLService.KEY_DATA, "");
-        send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
+        send.putString(BLService.KEY_TYPE, BLService.TYPE_LOGIN);
         send.putString(BLService.KEY_REQUEST, HttpUtils.POST_REQUEST);
         send.putString(BLService.KEY_USERNAME, email.getText().toString());
         send.putString(BLService.KEY_PASSWORD, password.getText().toString());
         service.putExtras(send);
         startService(service);
         progress = ProgressDialog.show(this, "", "Loading...", true, false);
-    }
-
-    private void registerFirebaseUser(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("BUKAIN", "createUserWithEmail:onComplete:" + task.isSuccessful());
-                        if (!task.isSuccessful()) {
-                            Snackbar.make(root, R.string.auth_failed, Snackbar.LENGTH_LONG).show();
-                        }
-                    }
-                });
-    }
-
-    private void signInFirebaseUser(final String email, final String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("BUKAIN", "signInWithEmail:onComplete:" + task.isSuccessful());
-
-                        if (!task.isSuccessful()) {
-                            Log.w("BUKAIN", "signInWithEmail:failed", task.getException());
-                            //@// TODO: 24/05/2017 : iki lo ul
-                        }
-                    }
-                });
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -184,10 +138,10 @@ public class LoginActivity extends AppCompatActivity {
                             User temp = dataSnapshot.getValue(User.class);
                             if (temp != null) {
                                 Log.d("BUKAIN", "NOT NULL");
-                                signInFirebaseUser(temp.email, temp.token);
+                                firebaseService.signInFirebaseUser(temp.email, temp.token, LoginActivity.this);
                             } else {
                                 Log.d("BUKAIN", "NULL");
-                                registerFirebaseUser(user.email, user.token);
+                                firebaseService.registerFirebaseUser(user.email, user.token, LoginActivity.this);
                             }
                         }
 
@@ -211,16 +165,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver(receiver, new IntentFilter("in.buka.app.REQUEST_COMPLETE"));
-        mAuth.addAuthStateListener(mAuthListener);
+        firebaseService.resumeAuth();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
+        firebaseService.pauseAuth();
     }
 
     @Override
