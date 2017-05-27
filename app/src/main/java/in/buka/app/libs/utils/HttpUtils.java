@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -23,8 +24,7 @@ public class HttpUtils {
     public static String POST_REQUEST = "POST";
 
     private HttpURLConnection conn = null;
-    public final String WEB_SERVER = Constants.SERVER_URL;
-    public final int TIMEOUT = 10000;
+    private final int TIMEOUT = 10000;
 
     private static class SingletonHolder {
         private static final HttpUtils INSTANCE = new HttpUtils();
@@ -42,7 +42,7 @@ public class HttpUtils {
         String result = null;
         URL ur;
         try {
-            ur = new URL(WEB_SERVER + uri);
+            ur = new URL(Constants.SERVER_URL + uri);
             conn = (HttpURLConnection) ur.openConnection();
 
             if(username != null) {
@@ -50,35 +50,27 @@ public class HttpUtils {
                 String base64EncodedCredentials = Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
                 conn.setRequestProperty("Authorization", "Basic " + base64EncodedCredentials);
             }
-
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
             conn.setRequestMethod(method);
 
             conn.setReadTimeout(TIMEOUT);
             conn.setConnectTimeout(TIMEOUT);
 
-            if (type.equals(POST_REQUEST)) {
+            if (method.equals(POST_REQUEST)) {
                 conn.setDoOutput(true);
                 OutputStreamWriter streamWriter = new OutputStreamWriter(conn.getOutputStream());
-                streamWriter.write(data);
+                streamWriter.write(query);
                 streamWriter.flush();
             }
-            OutputStreamWriter streamWriter = new OutputStreamWriter(conn.getOutputStream());
-            streamWriter.write(query);
-            streamWriter.flush();
 
             int status = conn.getResponseCode();
 
             if (status >= 200 && status < 300) {
                 result = readStream(conn.getInputStream());
             } else {
-                Log.d(ActivityFeedActivity.TAG, conn.getResponseMessage());
-//                result = readStream(conn.getErrorStream());
+                Log.d(Constants.TAG, conn.getResponseMessage());
             }
 
             return result;
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -94,44 +86,7 @@ public class HttpUtils {
         while ((line = reader.readLine()) != null) {
             total.append(line);
         }
-        if (reader != null) {
-            reader.close();
-    public static String sendPOSTRequest(String url, String data) {
-        URL ur;
-        HttpURLConnection conn = null;
-        try {
-            ur = new URL(url);
-            conn = (HttpURLConnection) ur.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("POST");
-
-            OutputStreamWriter streamWriter = new OutputStreamWriter(conn.getOutputStream());
-            streamWriter.write(data);
-            streamWriter.flush();
-
-            StringBuilder sb = new StringBuilder();
-            int HttpResult = conn.getResponseCode();
-            if (HttpResult == HttpURLConnection.HTTP_OK) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(
-                        conn.getInputStream(), "utf-8"));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line).append("\n");
-                }
-                br.close();
-
-                Log.d(Constants.TAG, sb.toString());
-
-            } else {
-                Log.d(Constants.TAG, conn.getResponseMessage());
-            }
-
-            return sb.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            conn.disconnect();
-        }
+        reader.close();
         return total.toString();
     }
 }

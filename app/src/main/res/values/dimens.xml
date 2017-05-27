@@ -39,6 +39,8 @@
     <dimen name="card_margin_x">@dimen/grid_2</dimen>
     <dimen name="project_card_margin_top">@dimen/grid_9_half</dimen>
     <dimen name="project_card_margin_bottom">@dimen/grid_1</dimen>
+    <dimen name="profile_card_photo_height">90dp</dimen>
+    <dimen name="profile_card_photo_width">@dimen/grid_20</dimen>
     <dimen name="profile_card_height">178dp</dimen>
 
     <!-- Icon sizes -->

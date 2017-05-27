@@ -27,7 +27,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import in.buka.app.libs.services.FirebaseService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -130,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         Bundle send = new Bundle();
         send.putString(BLService.KEY_URL, Constants.LOGIN_URL);
         send.putString(BLService.KEY_DATA, "");
-        send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
+        send.putString(BLService.KEY_TYPE, BLService.TYPE_LOGIN);
         send.putString(BLService.KEY_REQUEST, HttpUtils.POST_REQUEST);
         send.putString(BLService.KEY_USERNAME, email.getText().toString());
         send.putString(BLService.KEY_PASSWORD, password.getText().toString());

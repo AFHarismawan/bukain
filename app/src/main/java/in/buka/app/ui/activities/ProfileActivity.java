@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
@@ -23,6 +25,9 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import in.buka.app.R;
 import in.buka.app.libs.configs.Constants;
 import in.buka.app.libs.database.DatabaseHelper;
@@ -32,6 +37,7 @@ import in.buka.app.libs.utils.HttpUtils;
 import in.buka.app.libs.utils.JsonUtils;
 import in.buka.app.models.Project;
 import in.buka.app.models.User;
+import in.buka.app.ui.adapters.ActivityFeedAdapter;
 
 /**
  * Created by A. Fauzi Harismawan on 24/05/2017.
@@ -43,8 +49,10 @@ public class ProfileActivity extends AppCompatActivity {
     private ProgressDialog progress;
     private ImageView avatar;
     private TextView name, created, backed;
+    private RecyclerView recyclerView;
 
     private User user;
+    private List<Project> projects = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.user_name_text_view);
         created = (TextView) findViewById(R.id.created_count_text_view);
         backed = (TextView) findViewById(R.id.backed_count_text_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         Picasso.with(this)
                 .load(user.avatar)
@@ -84,7 +93,22 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(Constants.TAG, dataSnapshot.toString());
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Project project = postSnapshot.getValue(Project.class);
+                    project.id = dataSnapshot.getKey();
+                    projects.add(project);
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                        ActivityFeedAdapter adapter = new ActivityFeedAdapter(ProfileActivity.this, projects);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(ProfileActivity.this));
+                        Log.d(Constants.TAG, Integer.toString(projects.size()));
+                    }
+                });
             }
 
             @Override
