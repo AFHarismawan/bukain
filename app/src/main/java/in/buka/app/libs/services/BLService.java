@@ -35,11 +35,12 @@ public class BLService extends Service {
     public int onStartCommand(final Intent intent, int flags, int startId) {
         new AsyncTask<Void, Void, Void>() {
             String response;
+            String url;
 
             @Override
             protected Void doInBackground(Void... params) {
                 Bundle recv = intent.getExtras();
-                String url = recv.getString(KEY_URL);
+                url = recv.getString(KEY_URL);
                 String data = recv.getString(KEY_DATA);
                 String request = recv.getString(KEY_REQUEST);
 
@@ -67,6 +68,7 @@ public class BLService extends Service {
                 //send broadcast
                 Intent i = new Intent(Constants.REQUEST_COMPLETE_INTENT_FILTER);
                 Bundle send = new Bundle();
+                send.putString(KEY_URL, url);
                 send.putString(KEY_RESPONSE, response);
                 i.putExtras(send);
 

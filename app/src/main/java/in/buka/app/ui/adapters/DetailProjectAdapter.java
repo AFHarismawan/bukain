@@ -36,9 +36,11 @@ public class DetailProjectAdapter extends RecyclerView.Adapter<RecyclerView.View
     private User creator;
     private List<Product> products;
 
-    public DetailProjectAdapter(Context context, Project project) {
+    public DetailProjectAdapter(Context context, Project project, User creator, List<Product> products) {
         this.context = context;
         this.project = project;
+        this.creator = creator;
+        this.products = products;
     }
 
     @Override

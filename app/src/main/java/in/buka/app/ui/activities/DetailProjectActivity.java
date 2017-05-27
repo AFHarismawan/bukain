@@ -1,14 +1,17 @@
 /**
- *  Halaman pertama kali buka APP:
- *  List Project dengan tabulasi (Baru, Terdanai, Hampir Berakhir dll) dan tombol search
+ * Halaman pertama kali buka APP:
+ * List Project dengan tabulasi (Baru, Terdanai, Hampir Berakhir dll) dan tombol search
  **/
 
 package in.buka.app.ui.activities;
 
+import android.nfc.Tag;
+import in.buka.app.libs.database.DatabaseHelper;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -29,23 +32,34 @@ import in.buka.app.R;
 import in.buka.app.libs.configs.Constants;
 import in.buka.app.libs.database.DatabaseHelper;
 import in.buka.app.libs.services.BLService;
+import in.buka.app.libs.services.FirebaseService;
 import in.buka.app.libs.utils.HttpUtils;
 import in.buka.app.libs.utils.JsonUtils;
+import in.buka.app.models.Product;
 import in.buka.app.models.Project;
 import in.buka.app.models.User;
 import in.buka.app.ui.adapters.ActivityFeedAdapter;
 import in.buka.app.ui.adapters.DetailProjectAdapter;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailProjectActivity extends AppCompatActivity {
 
     protected RecyclerView projectRecyclerView;
     private Project project;
+    private User creator;
+    private ArrayList<Product> products = new ArrayList<>();
 
     public static String TAG = "BUKAIN";
     private RelativeLayout root;
     private ProgressDialog progress;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,20 +75,14 @@ public class DetailProjectActivity extends AppCompatActivity {
         projectRecyclerView = (RecyclerView) findViewById(R.id.project_recycler_view);
 
         Bundle bundle = getIntent().getExtras();
-        Project.get(bundle.getString(ActivityFeedAdapter.KEY_ID)).addListenerForSingleValueEvent(new ValueEventListener() {
+        id = bundle.getString(ActivityFeedAdapter.KEY_ID);
+        Project.get(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 project = dataSnapshot.getValue(Project.class);
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        projectRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-                        DetailProjectAdapter adapter = new DetailProjectAdapter(DetailProjectActivity.this, project);
-                        projectRecyclerView.setAdapter(adapter);
-                        projectRecyclerView.setLayoutManager(new LinearLayoutManager(DetailProjectActivity.this));
-                    }
-                });
+                progress = ProgressDialog.show(DetailProjectActivity.this, "", "Loading...", true, false);
+                Log.d(TAG, dataSnapshot.toString());
+                getProducts();
             }
 
             @Override
@@ -87,17 +95,36 @@ public class DetailProjectActivity extends AppCompatActivity {
     private void getProducts() {
         Intent service = new Intent(this, BLService.class);
         Bundle send = new Bundle();
-        Uri.Builder builder = new Uri.Builder()
-                .appendQueryParameter("keyword", project.id);
-        String query = builder.build().getEncodedQuery();
-
+        String q = "";
+        try {
+            q = URLEncoder.encode("keyword", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
+            q += "&" + URLEncoder.encode("user_id", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(project.uid), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Log.d(TAG, q);
         send.putString(BLService.KEY_URL, Constants.PRODUCTS_URL);
-        send.putString(BLService.KEY_DATA, query);
-        send.putString(BLService.KEY_TYPE, BLService.TYPE_NO_AUTH);
+        send.putString(BLService.KEY_DATA, q);
+        send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
         send.putString(BLService.KEY_REQUEST, HttpUtils.GET_REQUEST);
         service.putExtras(send);
         startService(service);
-        progress = ProgressDialog.show(this, "", "Loading...", true, false);
+    }
+
+    private void getUser() {
+        Intent service = new Intent(this, BLService.class);
+        Bundle send = new Bundle();
+
+        DatabaseHelper helper = new DatabaseHelper(this);
+        User user = helper.getCredentials();
+        Log.d(TAG, "getting user");
+
+        send.putString(BLService.KEY_URL, "users/" + user.id + "/profile.json");
+        send.putString(BLService.KEY_DATA, "");
+        send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
+        send.putString(BLService.KEY_REQUEST, HttpUtils.GET_REQUEST);
+        service.putExtras(send);
+        startService(service);
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -107,31 +134,51 @@ public class DetailProjectActivity extends AppCompatActivity {
                 Bundle recv = intent.getExtras();
 
                 JSONObject response = new JSONObject(recv.getString(BLService.KEY_RESPONSE));
-                if (response.getString("message").equals("null")) {
-                    User user = JsonUtils.parseUserCredentials(response);
-                    DatabaseHelper helper = new DatabaseHelper(DetailProjectActivity.this);
-                    helper.setCredentials(user);
 
-                    User.get(Integer.toString(user.id)).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            dataSnapshot.getValue(User.class);
+                if (recv.getString(BLService.KEY_URL).equals(Constants.PRODUCTS_URL)) {
+                    if(response.getString("status").equals("OK")){
+                        JSONArray prodcts = response.getJSONArray("products");
+                        for(int a = 0; a < prodcts.length(); a++){
+                            products.add(new Product(prodcts.getJSONObject(a)));                            products.add(JsonUtils.parseProduct(prodcts.toString()));
+//                            products.add(JsonUtils.parseProduct(prodcts.getJSONObject(a).toString()));
                         }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
+                        getUser();
+                    } else if(response.getString("status").equals("ERROR")){
+                        Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_LONG).show();
+                    }
                 } else {
-                    Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_LONG).show();
+                    JSONObject user = response.getJSONObject("user");
+                    creator = JsonUtils.parseUserProfile(user);
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            progress.dismiss();
+
+            if (products != null && creator != null) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        projectRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                        DetailProjectAdapter adapter = new DetailProjectAdapter(DetailProjectActivity.this, project, creator, products);
+                        projectRecyclerView.setAdapter(adapter);
+                        projectRecyclerView.setLayoutManager(new LinearLayoutManager(DetailProjectActivity.this));
+                    }
+                });
+                progress.dismiss();
+            }
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(receiver, new IntentFilter("in.buka.app.REQUEST_COMPLETE"));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
+    }
 }

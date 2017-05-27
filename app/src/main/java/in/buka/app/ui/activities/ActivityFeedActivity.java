@@ -43,7 +43,8 @@ public class ActivityFeedActivity extends ActivityWithDrawer {
                 Log.d(Constants.TAG, Long.toString(dataSnapshot.getChildrenCount()));
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Project project = postSnapshot.getValue(Project.class);
-                    project.id = dataSnapshot.getKey();
+                    project.id = postSnapshot.getKey();
+                    Log.d(Constants.TAG, project.id);
                     projects.add(project);
                 }
 

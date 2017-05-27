@@ -15,5 +15,5 @@ public class Constants {
     public static String LOGIN_FACEBOOK_URL = "facebook_loginv2.json";
 
     public static String PROFILE_URL = "users/info.json";
-    public static String PRODUCTS_URL = "users/info.json";
+    public static String PRODUCTS_URL = "products.json";
 }

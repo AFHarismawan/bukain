@@ -68,6 +68,7 @@ public class HttpUtils {
                 result = readStream(conn.getInputStream());
             } else {
                 Log.d(Constants.TAG, conn.getResponseMessage());
+                result = readStream(conn.getErrorStream());
             }
 
             return result;

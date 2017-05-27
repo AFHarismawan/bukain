@@ -136,7 +136,7 @@ public class ProfileActivity extends AppCompatActivity {
             try {
                 Bundle recv = intent.getExtras();
                 JSONObject response = new JSONObject(recv.getString(BLService.KEY_RESPONSE));
-                if (response.getString("message").equals("null")) {
+                if (response.getString("status").equals("OK")) {
                     DatabaseHelper helper = new DatabaseHelper(ProfileActivity.this);
                     user = helper.getCredentials();
                     user.avatar = JsonUtils.parseUserProfile(response).avatar;

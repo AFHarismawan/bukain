@@ -1,6 +1,8 @@
 package in.buka.app.models;
 
 import in.buka.app.libs.services.BLService;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Shade on 5/23/17.
@@ -26,9 +28,14 @@ public class Product {
     public String[] state;
     public String[] product_sin;
 
-    public Product(String id){
-        // TODO: 5/26/17 Panggil service helper untuk mengambil data product dari BL.
+    public Product(JSONObject json){
+        try {
+            this.id = Integer.toString(json.getInt("id"));
+            this.name = json.getString("name");
+            this.category = json.getString("category");
+            this.price = json.getInt("price");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
-
-
 }
