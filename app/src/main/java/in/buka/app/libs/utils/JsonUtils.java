@@ -1,7 +1,5 @@
 package in.buka.app.libs.utils;
 
-import com.google.gson.Gson;
-import in.buka.app.models.Product;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,9 +41,20 @@ public class JsonUtils {
         }
         return null;
     }
-    
-    public static Product parseProduct(String json) {
-        Gson gson = new Gson();
-        return gson.fromJson(json, Product.class);
+
+    public static User parseUser(JSONObject json) {
+        try {
+            JSONObject jsonObject = json.getJSONObject("user");
+            User user = new User();
+            user.id = jsonObject.getInt("id");
+            user.name = jsonObject.getString("name");
+            user.avatar = jsonObject.getString("avatar");
+            user.reputation = new JSONObject(jsonObject.getString("feedbacks")).getInt("positive");
+
+            return user;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -16,4 +16,5 @@ public class Constants {
 
     public static String PROFILE_URL = "users/info.json";
     public static String PRODUCTS_URL = "products.json";
+    public static String USER_URL = "users/%d/profile.json";
 }

@@ -39,6 +39,8 @@ import in.buka.app.models.Project;
 import in.buka.app.models.User;
 import in.buka.app.ui.adapters.ActivityFeedAdapter;
 
+import static in.buka.app.libs.configs.Constants.PROFILE_URL;
+
 /**
  * Created by A. Fauzi Harismawan on 24/05/2017.
  */
@@ -50,16 +52,19 @@ public class ProfileActivity extends AppCompatActivity {
     private LinearLayout root;
     private ProgressDialog progress;
     private ImageView avatar;
-    private TextView name, created, backed;
+    private TextView name, created, backed, bcd;
     private RecyclerView recyclerView;
 
     private User user;
     private List<Project> projects = new ArrayList<>();
+    private Bundle recv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        recv = getIntent().getExtras();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,6 +83,7 @@ public class ProfileActivity extends AppCompatActivity {
         avatar = (ImageView) findViewById(R.id.avatar_image_view);
         name = (TextView) findViewById(R.id.user_name_text_view);
         created = (TextView) findViewById(R.id.created_count_text_view);
+        bcd = (TextView) findViewById(R.id.backed_text_view);
         backed = (TextView) findViewById(R.id.backed_count_text_view);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -88,6 +94,19 @@ public class ProfileActivity extends AppCompatActivity {
                 .into(avatar);
 
         name.setText(user.name);
+        created.setText(projects.size());
+
+        if (recv.getInt(KEY_ID) != 0) {
+            bcd.setText(getString(R.string.profile_projects_reputation));
+            backed.setText(Integer.toString(user.reputation));
+        }
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        ActivityFeedAdapter adapter = new ActivityFeedAdapter(ProfileActivity.this, projects);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ProfileActivity.this));
+        Log.d(Constants.TAG, Integer.toString(projects.size()));
     }
 
     private void getProjectData() {
@@ -104,11 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-                        ActivityFeedAdapter adapter = new ActivityFeedAdapter(ProfileActivity.this, projects);
-                        recyclerView.setAdapter(adapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(ProfileActivity.this));
-                        Log.d(Constants.TAG, Integer.toString(projects.size()));
+                        initView();
                     }
                 });
             }
@@ -123,7 +138,12 @@ public class ProfileActivity extends AppCompatActivity {
     private void getUserData() {
         Intent service = new Intent(this, BLService.class);
         Bundle send = new Bundle();
-        send.putString(BLService.KEY_URL, Constants.PROFILE_URL);
+        if (recv.getInt(KEY_ID) != 0) {
+            String url = String.format(Constants.USER_URL, recv.getInt(KEY_ID));
+            send.putString(BLService.KEY_URL, url);
+        } else {
+            send.putString(BLService.KEY_URL, PROFILE_URL);
+        }
         send.putString(BLService.KEY_DATA, "");
         send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
         send.putString(BLService.KEY_REQUEST, HttpUtils.GET_REQUEST);
@@ -139,11 +159,14 @@ public class ProfileActivity extends AppCompatActivity {
                 Bundle recv = intent.getExtras();
                 JSONObject response = new JSONObject(recv.getString(BLService.KEY_RESPONSE));
                 if (response.getString("status").equals("OK")) {
-                    DatabaseHelper helper = new DatabaseHelper(ProfileActivity.this);
-                    user = helper.getCredentials();
-                    user.avatar = JsonUtils.parseUserProfile(response).avatar;
+                    if (recv.getInt(KEY_ID) != 0) {
+                        user = JsonUtils.parseUser(response);
+                    } else {
+                        DatabaseHelper helper = new DatabaseHelper(ProfileActivity.this);
+                        user = helper.getCredentials();
+                        user.avatar = JsonUtils.parseUserProfile(response).avatar;
+                    }
 
-                    initView();
                     getProjectData();
                 } else {
                     Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_LONG).show();

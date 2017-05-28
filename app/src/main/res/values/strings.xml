@@ -41,6 +41,7 @@
     </string>
     <string name="profile_projects_created_projects" formatted="false">Created projects</string>
     <string name="profile_projects_backed_projects" formatted="false">Backed projects</string>
+    <string name="profile_projects_reputation" formatted="false">Reputations</string>
 
     <string name="project_back_button" formatted="false">Back this project</string>
     <string name="project_manage_button" formatted="false">Manage pledge</string>

@@ -1,4 +1,4 @@
-package in.buka.app.libs.services;
+package in.buka.app.libs.utils;
 
 /**
  * Created by Shade on 5/23/17.
@@ -6,7 +6,6 @@ package in.buka.app.libs.services;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -15,23 +14,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import in.buka.app.R;
 
-public class FirebaseService {
+public class FirebaseUtils {
     private DatabaseReference dataReference;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private final static String USERS_PATH = "users";
 
     private static class SingletonHolder {
-        private static final FirebaseService INSTANCE = new FirebaseService();
+        private static final FirebaseUtils INSTANCE = new FirebaseUtils();
     }
 
-    public static FirebaseService getInstance() {
+    public static FirebaseUtils getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
-    public FirebaseService(){
+    public FirebaseUtils(){
         dataReference = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {

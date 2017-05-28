@@ -23,6 +23,7 @@ public class User extends FirebaseModel{
     public String avatar_id;
     public Bank bank;
     public String omnikey;
+    public int reputation;
 
     public @Nullable Integer backedProjectsCount;
     public @Nullable Integer createdProjectsCount;

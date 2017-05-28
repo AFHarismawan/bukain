@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/grid_1_half"
                         android:layout_marginRight="@dimen/grid_1_half"
-                        tools:text="0" />
+                        android:text="0" />
 
                     <View
                         android:id="@+id/divider_view"
@@ -104,7 +104,7 @@
                         style="@style/SubheadPrimary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="0" />
+                        android:text="0" />
 
                 </LinearLayout>
 
