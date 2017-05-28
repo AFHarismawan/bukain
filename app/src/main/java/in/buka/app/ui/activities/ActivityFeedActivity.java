@@ -1,10 +1,11 @@
 /**
- *  Halaman pertama kali buka APP:
- *  List Project dengan tabulasi (Baru, Terdanai, Hampir Berakhir dll) dan tombol search
+ * Halaman pertama kali buka APP:
+ * List Project dengan tabulasi (Baru, Terdanai, Hampir Berakhir dll) dan tombol search
  **/
 
 package in.buka.app.ui.activities;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +38,7 @@ public class ActivityFeedActivity extends ActivityWithDrawer {
 
         setContent(R.layout.activity_feed_layout);
 
+        final ProgressDialog progress = ProgressDialog.show(this, "", "Loading...", true, false);
         Project.get().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -51,11 +53,12 @@ public class ActivityFeedActivity extends ActivityWithDrawer {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                    recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-                    ActivityFeedAdapter adapter = new ActivityFeedAdapter(ActivityFeedActivity.this, projects);
-                    recyclerView.setAdapter(adapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(ActivityFeedActivity.this));
-                    Log.d(Constants.TAG, Integer.toString(projects.size()));
+                        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                        ActivityFeedAdapter adapter = new ActivityFeedAdapter(ActivityFeedActivity.this, projects);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(ActivityFeedActivity.this));
+                        Log.d(Constants.TAG, Integer.toString(projects.size()));
+                        progress.dismiss();
                     }
                 });
             }

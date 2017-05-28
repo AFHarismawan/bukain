@@ -1,6 +1,7 @@
 package in.buka.app.ui.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -64,10 +65,13 @@ class ActivityWithDrawer extends AppCompatActivity implements NavigationView.OnN
         int id = item.getItemId();
 
         Intent change;
+        Bundle send;
         switch (id) {
             case R.id.nav_login:
                 if (helper.getCredentials().name != null) {
                     change = new Intent(this, ProfileActivity.class);
+                    send = new Bundle();
+                    send.putInt(ProfileActivity.KEY_ID, 0);
                     startActivity(change);
                 } else {
                     change = new Intent(this, ToutActivity.class);
