@@ -16,13 +16,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-
 import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import in.buka.app.R;
 import in.buka.app.libs.configs.Constants;
@@ -34,14 +41,6 @@ import in.buka.app.models.Project;
 import in.buka.app.models.User;
 import in.buka.app.ui.adapters.ActivityFeedAdapter;
 import in.buka.app.ui.adapters.DetailProjectAdapter;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DetailProjectActivity extends AppCompatActivity {
 
