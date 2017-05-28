@@ -2,9 +2,9 @@ package in.buka.app.models;
 
 import com.google.firebase.database.DatabaseReference;
 
-import in.buka.app.models.structure.FirebaseModel;
-
 import java.util.List;
+
+import in.buka.app.models.structure.FirebaseModel;
 
 /**
  * Created by A. Fauzi Harismawan on 06/05/2017.
@@ -45,7 +45,7 @@ public class Project extends FirebaseModel {
     }
 
     public int fundedPercent() {
-        return (int) (modal / funded) * 100;
+        return (int) (funded / modal) * 100;
     }
 
     public String funded() {
