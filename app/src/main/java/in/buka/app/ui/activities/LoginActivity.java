@@ -196,6 +196,11 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                     });
+
+                    Intent change = new Intent(LoginActivity.this, ActivityFeedActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(change);
+                    finish();
                 } else {
                     Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_LONG).show();
                 }
