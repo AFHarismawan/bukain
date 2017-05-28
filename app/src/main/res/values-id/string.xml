@@ -1,0 +1,73 @@
+<resources>
+
+    <string name="app_name">Bukain</string>
+    <string name="bl_service">BLService</string>
+    <string name="font_family_medium">sans-serif-medium</string>
+
+    <!--<string name="connection_error" formatted="false"></string>-->
+
+    <string name="profile" formatted="false">Profil</string>
+    <string name="auth_failed" formatted="false">Register firebase failed!</string>
+    <string name="navigate_back_label" formatted="false">Kembali</string>
+    <string name="navigation_header_activity" formatted="false">Activity</string>
+    <string name="stats_funded" formatted="false">terdanai</string>
+    <string name="stats_backers" formatted="false">pendukung</string>
+    <string name="stats_days" formatted="false">hari lagi</string>
+
+    <string name="deadline_units_days" formatted="false">hari</string>
+    <string name="deadline_units_hours" formatted="false">jam</string>
+    <string name="deadline_units_mins" formatted="false">menit</string>
+    <string name="deadline_units_secs" formatted="false">detik</string>
+    <string name="time_left_to_go" formatted="false">%{time_left} hari lagi</string>
+
+    <string name="error_invalid_email">Alamat email tidak sesuai</string>
+    <string name="error_invalid_password">Password terlalu pendek</string>
+    <string name="error_incorrect_password">Password ini tidak sesuai</string>
+    <string name="error_field_required">Wajib diisi</string>
+
+    <string name="login_placeholder_email" formatted="false">Alamat Email</string>
+    <string name="login_placeholder_password" formatted="false">Password</string>
+    <string name="login_buttons_log_in" formatted="false">Log in</string>
+    <string name="login_tout_buttons_log_in_with_facebook" formatted="false">Masuk dengan Facebook</string>
+    <string name="login_tout_buttons_log_in_with_google" formatted="false">Masuk dengan Google</string>
+    <string name="login_buttons_log_in_email" formatted="false">Log Masuk dengan Bukalapak</string>
+    <string name="signup_button_email" formatted="false">Daftar dengan Email</string>
+
+    <string name="login_tout_disclaimer_by_signing_up_you_agree_to_terms_html" formatted="false">By signing up, you
+        agree to our &lt;u>terms of use&lt;/u>, &lt;u>privacy policy&lt;/u>, and &lt;u>cookie policy&lt;/u>.
+    </string>
+    <string name="login_tout_disclaimer_we_never_post_anything_without_permission" formatted="false">We\'ll never post
+        anything without your permission.
+    </string>
+    <string name="profile_projects_created_projects" formatted="false">Projects</string>
+    <string name="profile_projects_backed_projects" formatted="false">Backed projects</string>
+    <string name="profile_projects_reputation" formatted="false">Reputasi</string>
+
+    <string name="project_back_button" formatted="false">Dukung project ini</string>
+    <string name="project_manage_button" formatted="false">Kelola dukungan</string>
+    <string name="project_view_button" formatted="false">Lihat dukungan</string>
+
+    <string name="project_menu_created_by" formatted="false">Created by</string>
+    <string name="project_menu_buttons_campaign" formatted="false">Kampanye</string>
+    <string name="project_menu_buttons_updates" formatted="false">Updates</string>
+    <string name="project_menu_buttons_comments" formatted="false">Comments</string>
+
+    <string name="project_creator_youre_a_backer" formatted="false">\u0020• Kamu adalah pendukung</string>
+    <string name="backer_icon">pendukung</string>
+    <string name="discovery_baseball_card_accessibility_category_label" formatted="false">Kategori</string>
+    <string name="discovery_baseball_card_accessibility_location_label" formatted="false">Lokasi</string>
+    <string name="discovery_baseball_card_stats_backers" formatted="false">pendukung</string>
+
+    <string name="products_selected_label_you_selected" formatted="false">You memilih</string>
+    <string name="products_info_includes" formatted="false">Termasuk</string>
+    <string name="products_info_all_gone" formatted="false">Stok Habis</string>
+    <string name="products_info_shipping" formatted="false">Pengiriman</string>
+    <string name="products_info_estimated_delivery" formatted="false">Perkiraan pengiriman</string>
+
+    <string name="accessibility_projects_buttons_play_video" formatted="false">Play video</string>
+
+    <string name="local_offer_icon">\ue54e</string>
+    <string name="location_on_icon">\ue0c8</string>
+    <string name="chevron_right_icon">\ue5cc</string>
+    <string name="play_arrow">\ue037</string>
+</resources>

@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.squareup.picasso.Picasso;
 import in.buka.app.R;
+import in.buka.app.libs.configs.Constants;
 import in.buka.app.libs.utils.CircleTransformation;
 import in.buka.app.libs.utils.ProjectUtils;
 import in.buka.app.libs.utils.ViewUtils;
@@ -125,7 +127,8 @@ public class DetailProjectAdapter extends RecyclerView.Adapter<RecyclerView.View
                 final Product product = products.get(position-1);
 
                 ProductViewHolder productHolder = (ProductViewHolder) holder;
-                String name = product.name.split(project.name)[1];
+                Log.d(Constants.TAG, product.name);
+                String name = product.name.split(project.id)[1];
                 productHolder.productName.setText(name);
                 productHolder.productDesc.setText(product.desc);
                 productHolder.price.setText(product.price +",- IDR");

@@ -62,7 +62,6 @@ public class DetailProjectActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle(R.string.app_name);
 
         root = (RelativeLayout) findViewById(R.id.container_detail_project);
 
@@ -74,6 +73,9 @@ public class DetailProjectActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 project = dataSnapshot.getValue(Project.class);
+                project.id = id;
+//                toolbar.setTitle(project.name);
+                setTitle(project.name);
                 progress = ProgressDialog.show(DetailProjectActivity.this, "", "Loading...", true, false);
                 Log.d(TAG, dataSnapshot.toString());
                 getProducts();
@@ -91,7 +93,7 @@ public class DetailProjectActivity extends AppCompatActivity {
         Bundle send = new Bundle();
         String q = "";
         try {
-            q = URLEncoder.encode("keyword", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
+            q = URLEncoder.encode("keywords", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
             q += "&" + URLEncoder.encode("user_id", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(project.uid), "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
