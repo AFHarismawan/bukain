@@ -45,6 +45,8 @@ import in.buka.app.ui.adapters.ActivityFeedAdapter;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    public static String KEY_ID = "uid";
+
     private LinearLayout root;
     private ProgressDialog progress;
     private ImageView avatar;

@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import in.buka.app.R;
 
@@ -23,11 +24,15 @@ public class ProjectDetailViewHolder extends RecyclerView.ViewHolder {
             funded;
     public ProgressBar percentageFunded;
 
+    public RelativeLayout profile;
+
     public ImageView avatar;
     public TextView avatarName, updateCount, commentCount, disclaimer;
 
     public ProjectDetailViewHolder(View itemView) {
         super(itemView);
+        profile = (RelativeLayout) itemView.findViewById(R.id.creator_info);
+
         projectName = (TextView) itemView.findViewById(R.id.project_name);
         creatorName = (TextView) itemView.findViewById(R.id.creator_name);
         projectCategory = (TextView) itemView.findViewById(R.id.category);

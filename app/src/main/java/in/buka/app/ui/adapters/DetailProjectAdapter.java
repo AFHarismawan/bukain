@@ -1,11 +1,14 @@
 package in.buka.app.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import com.squareup.picasso.Picasso;
 import in.buka.app.R;
 import in.buka.app.libs.utils.CircleTransformation;
@@ -15,6 +18,8 @@ import in.buka.app.models.Product;
 import in.buka.app.models.Project;
 import in.buka.app.models.User;
 import in.buka.app.ui.activities.DetailCampaignProjectActivity;
+import in.buka.app.ui.activities.DetailProjectActivity;
+import in.buka.app.ui.activities.ProfileActivity;
 import in.buka.app.ui.viewholders.ProductViewHolder;
 import in.buka.app.ui.viewholders.ProjectDetailViewHolder;
 
@@ -105,10 +110,14 @@ public class DetailProjectAdapter extends RecyclerView.Adapter<RecyclerView.View
                 detailHolder.creatorName.setText(creator.name);
                 detailHolder.avatarName.setText(creator.name);
 
-                detailHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                detailHolder.profile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        Intent detail = new Intent(context, ProfileActivity.class);
+                        Bundle send = new Bundle();
+                        send.putInt(ProfileActivity.KEY_ID, project.uid);
+                        detail.putExtras(send);
+                        context.startActivity(detail);
                     }
                 });
                 break;
@@ -116,8 +125,8 @@ public class DetailProjectAdapter extends RecyclerView.Adapter<RecyclerView.View
                 final Product product = products.get(position-1);
 
                 ProductViewHolder productHolder = (ProductViewHolder) holder;
-
-                productHolder.productName.setText(product.name);
+                String name = product.name.split(project.name)[1];
+                productHolder.productName.setText(name);
                 productHolder.productDesc.setText(product.desc);
                 productHolder.price.setText(product.price +",- IDR");
                 productHolder.stokHabis.setText(product.stock == 0 ? "Stok Habis" : "");
@@ -126,6 +135,13 @@ public class DetailProjectAdapter extends RecyclerView.Adapter<RecyclerView.View
                 productHolder.delivery.setText("12 December 2017");
                 productHolder.deliveryTo.setText(product.courier);
 
+
+                productHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
                 break;
         }
     }

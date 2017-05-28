@@ -96,7 +96,7 @@ public class DetailProjectActivity extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        Log.d(TAG, q);
+        Log.d(TAG, Constants.PRODUCTS_URL + "?" + q);
         send.putString(BLService.KEY_URL, Constants.PRODUCTS_URL + "?" + q);
         send.putString(BLService.KEY_DATA, "");
         send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
