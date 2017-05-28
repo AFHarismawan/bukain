@@ -6,7 +6,7 @@ android:layout_width="match_parent"
 android:id="@+id/container_detail_project">
 
     <include
-        android:id="@+id/project_toolbar"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
     <android.support.v7.widget.RecyclerView
@@ -14,7 +14,7 @@ android:id="@+id/container_detail_project">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/project_action_buttons"
-        android:layout_below="@id/project_toolbar"
+        android:layout_below="@id/toolbar"
         android:background="@color/light_gray" />
 
     <RelativeLayout
