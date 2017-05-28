@@ -7,14 +7,16 @@ package in.buka.app.libs.configs;
 public class Constants {
 
     public static final String SERVER_URL = "https://api.bukalapak.com/v2/";
-    public static String TAG = "BUKAIN";
-    public static String REQUEST_COMPLETE_INTENT_FILTER = "in.buka.app.REQUEST_COMPLETE";
+    public static final String TAG = "BUKAIN";
+    public static final String REQUEST_COMPLETE_INTENT_FILTER = "in.buka.app.REQUEST_COMPLETE";
 
-    public static String LOGIN_URL = "authenticate.json";
-    public static String LOGIN_GOOGLE_URL = "google_login.json";
-    public static String LOGIN_FACEBOOK_URL = "facebook_loginv2.json";
+    public static final String LOGIN_URL = "authenticate.json";
+    public static final String LOGIN_GOOGLE_URL = "google_login.json";
+    public static final String LOGIN_FACEBOOK_URL = "facebook_loginv2.json";
 
-    public static String PROFILE_URL = "users/info.json";
-    public static String PRODUCTS_URL = "products.json";
-    public static String USER_URL = "users/%d/profile.json";
+    public static final String PROFILE_URL = "users/info.json";
+    public static final String PRODUCTS_URL = "products.json";
+    public static final String USER_URL = "users/%d/profile.json";
+    public static final String ADD_TO_CART_URL = "carts/add_product/%d.json";
+    public static final String VIEW_CART_URL = "https://www.bukalapak.com/cart/carts";
 }
