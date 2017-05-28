@@ -3,25 +3,35 @@ package in.buka.app.ui.activities;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.widget.LinearLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import in.buka.app.R;
 import in.buka.app.libs.configs.Constants;
 import in.buka.app.libs.services.BLService;
 import in.buka.app.libs.utils.HttpUtils;
 import in.buka.app.ui.adapters.ActivityFeedAdapter;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by Shade on 5/28/17.
  */
 
 public class ProductCartActivity extends WebViewActivity {
+
     public static String KEY_ID = "id";
+    public LinearLayout root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        root = (LinearLayout) findViewById(R.id.root);
+
         Bundle bundle = getIntent().getExtras();
         String id = bundle.getString(ActivityFeedAdapter.KEY_ID);
         url = Constants.VIEW_CART_URL;
@@ -48,7 +58,7 @@ public class ProductCartActivity extends WebViewActivity {
                 JSONObject response = new JSONObject(recv.getString(BLService.KEY_RESPONSE));
 
                 if(response.getString("status").equals("OK")){
-
+                    initWebView();
                 } else if(response.getString("status").equals("ERROR")){
                     Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_LONG).show();
                 }
@@ -59,5 +69,16 @@ public class ProductCartActivity extends WebViewActivity {
         }
     };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(receiver, new IntentFilter(Constants.REQUEST_COMPLETE_INTENT_FILTER));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
+    }
 }
 

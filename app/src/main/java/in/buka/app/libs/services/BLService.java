@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 import in.buka.app.libs.configs.Constants;
 import in.buka.app.libs.database.DatabaseHelper;
@@ -51,6 +52,7 @@ public class BLService extends Service {
                 } else if (recv.getString(KEY_TYPE).equals(TYPE_AUTH)) {
                     DatabaseHelper helper = new DatabaseHelper(BLService.this);
                     User user = helper.getCredentials();
+                    Log.d(Constants.TAG, user.id + ":" + user.token);
 
                     String username = Integer.toString(user.id);
                     String password = user.token;

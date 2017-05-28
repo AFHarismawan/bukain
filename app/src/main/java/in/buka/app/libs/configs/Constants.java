@@ -17,6 +17,6 @@ public class Constants {
     public static final String PROFILE_URL = "users/info.json";
     public static final String PRODUCTS_URL = "products.json";
     public static final String USER_URL = "users/%d/profile.json";
-    public static final String ADD_TO_CART_URL = "carts/add_product/%d.json";
+    public static final String ADD_TO_CART_URL = "carts/add_product/%s.json";
     public static final String VIEW_CART_URL = "https://www.bukalapak.com/cart/carts";
 }

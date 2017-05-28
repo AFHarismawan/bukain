@@ -32,6 +32,9 @@
         <activity
             android:name=".ui.activities.ProfileActivity">
         </activity>
+        <activity
+            android:name=".ui.activities.ProductCartActivity">
+        </activity>
 
         <service
                 android:name=".libs.services.BLService"

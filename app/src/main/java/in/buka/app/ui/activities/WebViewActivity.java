@@ -13,7 +13,6 @@ import in.buka.app.R;
 public abstract class WebViewActivity extends AppCompatActivity {
 
     protected String url;
-    protected WebView root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public abstract class WebViewActivity extends AppCompatActivity {
     }
 
     protected void initWebView() {
-        root = (WebView) findViewById(R.id.web_view);
-        root.loadUrl(url);
+        WebView webView = (WebView) findViewById(R.id.web_view);
+        webView.loadUrl(url);
     }
 }

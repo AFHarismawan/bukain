@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                 Bundle recv = intent.getExtras();
 
                 JSONObject response = new JSONObject(recv.getString(BLService.KEY_RESPONSE));
-                if (response.getString("message").equals("null")) {
+                if(response.getString("status").equals("OK")){
                     final User user = JsonUtils.parseUserCredentials(response);
                     DatabaseHelper helper = new DatabaseHelper(LoginActivity.this);
                     helper.setCredentials(user);
