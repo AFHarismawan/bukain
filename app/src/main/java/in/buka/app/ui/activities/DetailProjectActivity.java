@@ -16,13 +16,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-
 import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import in.buka.app.R;
 import in.buka.app.libs.configs.Constants;
@@ -34,14 +41,6 @@ import in.buka.app.models.Project;
 import in.buka.app.models.User;
 import in.buka.app.ui.adapters.ActivityFeedAdapter;
 import in.buka.app.ui.adapters.DetailProjectAdapter;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DetailProjectActivity extends AppCompatActivity {
 
@@ -62,7 +61,10 @@ public class DetailProjectActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle(R.string.app_name);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setTitle(R.string.app_name);
+        }
 
         root = (RelativeLayout) findViewById(R.id.container_detail_project);
 
@@ -131,7 +133,6 @@ public class DetailProjectActivity extends AppCompatActivity {
                         Log.d(TAG, prodcts.toString());
                         for(int a = 0; a < prodcts.length(); a++){
                             products.add(new Product(prodcts.getJSONObject(a)));
-//                            products.add(JsonUtils.parseProduct(prodcts.getJSONObject(a).toString()));
                         }
                         getUser();
                     } else if(response.getString("status").equals("ERROR")){
@@ -164,12 +165,18 @@ public class DetailProjectActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(receiver, new IntentFilter("in.buka.app.REQUEST_COMPLETE"));
+        registerReceiver(receiver, new IntentFilter(Constants.REQUEST_COMPLETE_INTENT_FILTER));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return false;
     }
 }

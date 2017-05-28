@@ -45,7 +45,7 @@ public class Project extends FirebaseModel {
     }
 
     public int fundedPercent() {
-        return (int) (funded / modal) * 100;
+        return (int) (funded * 100 / modal);
     }
 
     public String funded() {

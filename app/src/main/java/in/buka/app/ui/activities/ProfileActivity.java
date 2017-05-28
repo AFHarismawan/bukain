@@ -94,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .into(avatar);
 
         name.setText(user.name);
-        created.setText(projects.size());
+        created.setText(Integer.toString(projects.size()));
 
         if (recv.getInt(KEY_ID) != 0) {
             bcd.setText(getString(R.string.profile_projects_reputation));
@@ -140,6 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
         Bundle send = new Bundle();
         if (recv.getInt(KEY_ID) != 0) {
             String url = String.format(Constants.USER_URL, recv.getInt(KEY_ID));
+            Log.d(Constants.TAG, "URL : " + url);
             send.putString(BLService.KEY_URL, url);
         } else {
             send.putString(BLService.KEY_URL, PROFILE_URL);
@@ -159,7 +160,8 @@ public class ProfileActivity extends AppCompatActivity {
                 Bundle recv = intent.getExtras();
                 JSONObject response = new JSONObject(recv.getString(BLService.KEY_RESPONSE));
                 if (response.getString("status").equals("OK")) {
-                    if (recv.getInt(KEY_ID) != 0) {
+                    if (ProfileActivity.this.recv.getInt(KEY_ID) != 0) {
+                        Log.d(Constants.TAG, "ID : " + recv.getInt(KEY_ID));
                         user = JsonUtils.parseUser(response);
                     } else {
                         DatabaseHelper helper = new DatabaseHelper(ProfileActivity.this);
@@ -189,5 +191,11 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return false;
     }
 }
