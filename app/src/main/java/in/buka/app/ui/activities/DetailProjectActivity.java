@@ -77,7 +77,6 @@ public class DetailProjectActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 project = dataSnapshot.getValue(Project.class);
                 project.id = id;
-//                toolbar.setTitle(project.name);
                 setTitle(project.name);
                 progress = ProgressDialog.show(DetailProjectActivity.this, "", "Loading...", true, false);
                 Log.d(TAG, dataSnapshot.toString());

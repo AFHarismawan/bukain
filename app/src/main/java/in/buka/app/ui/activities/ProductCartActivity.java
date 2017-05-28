@@ -35,10 +35,10 @@ public class ProductCartActivity extends WebViewActivity {
         Bundle bundle = getIntent().getExtras();
         String id = bundle.getString(ActivityFeedAdapter.KEY_ID);
         url = Constants.VIEW_CART_URL;
-        addTocart(id);
+        addToCart(id);
     }
 
-    private void addTocart(String id) {
+    private void addToCart(String id) {
         Intent service = new Intent(this, BLService.class);
         Bundle send = new Bundle();
         send.putString(BLService.KEY_URL, String.format(Constants.ADD_TO_CART_URL, id));
