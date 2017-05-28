@@ -41,15 +41,15 @@
         tools:visibility="visible">
 
         <TextView
-          style="@style/CaptionSecondaryMedium"
-          android:background="@color/green"
-          android:textColor="@color/white"
-          android:layout_width="wrap_content"
-          android:layout_height="match_parent"
-          android:gravity="center"
-          android:paddingLeft="@dimen/grid_3_half"
-          android:paddingRight="@dimen/grid_3_half"
-          android:text="@string/products_selected_label_you_selected" />
+                style="@style/CaptionSecondaryMedium"
+                android:background="@color/green"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingLeft="@dimen/grid_3_half"
+                android:paddingRight="@dimen/grid_3_half"
+                android:text="@string/products_selected_label_you_selected" android:id="@+id/textView"/>
 
       </LinearLayout>
 
@@ -67,18 +67,11 @@
 
           <TextView
             style="@style/EditorialSubhead"
-            android:id="@+id/product_minimum_text_view"
+            android:id="@+id/product_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/product_blue"
             tools:text="$20 AUD" />
-
-          <TextView
-            style="@style/CaptionSecondary"
-            android:id="@+id/product_usd_conversion_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="About $15 USD" />
 
         </LinearLayout>
 

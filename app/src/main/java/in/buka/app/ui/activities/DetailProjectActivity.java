@@ -5,19 +5,15 @@
 
 package in.buka.app.ui.activities;
 
-import android.nfc.Tag;
-import in.buka.app.libs.database.DatabaseHelper;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
@@ -30,9 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import in.buka.app.R;
 import in.buka.app.libs.configs.Constants;
-import in.buka.app.libs.database.DatabaseHelper;
 import in.buka.app.libs.services.BLService;
-import in.buka.app.libs.services.FirebaseService;
 import in.buka.app.libs.utils.HttpUtils;
 import in.buka.app.libs.utils.JsonUtils;
 import in.buka.app.models.Product;
@@ -103,8 +97,8 @@ public class DetailProjectActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.d(TAG, q);
-        send.putString(BLService.KEY_URL, Constants.PRODUCTS_URL);
-        send.putString(BLService.KEY_DATA, q);
+        send.putString(BLService.KEY_URL, Constants.PRODUCTS_URL + "?" + q);
+        send.putString(BLService.KEY_DATA, "");
         send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
         send.putString(BLService.KEY_REQUEST, HttpUtils.GET_REQUEST);
         service.putExtras(send);
@@ -115,11 +109,7 @@ public class DetailProjectActivity extends AppCompatActivity {
         Intent service = new Intent(this, BLService.class);
         Bundle send = new Bundle();
 
-        DatabaseHelper helper = new DatabaseHelper(this);
-        User user = helper.getCredentials();
-        Log.d(TAG, "getting user");
-
-        send.putString(BLService.KEY_URL, "users/" + user.id + "/profile.json");
+        send.putString(BLService.KEY_URL, "users/" + project.uid + "/profile.json");
         send.putString(BLService.KEY_DATA, "");
         send.putString(BLService.KEY_TYPE, BLService.TYPE_AUTH);
         send.putString(BLService.KEY_REQUEST, HttpUtils.GET_REQUEST);
@@ -135,11 +125,12 @@ public class DetailProjectActivity extends AppCompatActivity {
 
                 JSONObject response = new JSONObject(recv.getString(BLService.KEY_RESPONSE));
 
-                if (recv.getString(BLService.KEY_URL).equals(Constants.PRODUCTS_URL)) {
+                if (recv.getString(BLService.KEY_URL).split(Constants.PRODUCTS_URL).length == 2) {
                     if(response.getString("status").equals("OK")){
                         JSONArray prodcts = response.getJSONArray("products");
+                        Log.d(TAG, prodcts.toString());
                         for(int a = 0; a < prodcts.length(); a++){
-                            products.add(new Product(prodcts.getJSONObject(a)));                            products.add(JsonUtils.parseProduct(prodcts.toString()));
+                            products.add(new Product(prodcts.getJSONObject(a)));
 //                            products.add(JsonUtils.parseProduct(prodcts.getJSONObject(a).toString()));
                         }
                         getUser();
@@ -147,8 +138,8 @@ public class DetailProjectActivity extends AppCompatActivity {
                         Snackbar.make(root, response.getString("message"), Snackbar.LENGTH_LONG).show();
                     }
                 } else {
-                    JSONObject user = response.getJSONObject("user");
-                    creator = JsonUtils.parseUserProfile(user);
+                    Log.d(TAG, response.toString());
+                    creator = JsonUtils.parseUserProfile(response);
                 }
 
             } catch (JSONException e) {
@@ -159,7 +150,7 @@ public class DetailProjectActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        projectRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+                        projectRecyclerView = (RecyclerView) findViewById(R.id.project_recycler_view);
                         DetailProjectAdapter adapter = new DetailProjectAdapter(DetailProjectActivity.this, project, creator, products);
                         projectRecyclerView.setAdapter(adapter);
                         projectRecyclerView.setLayoutManager(new LinearLayoutManager(DetailProjectActivity.this));

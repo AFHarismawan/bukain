@@ -14,13 +14,14 @@ public class Project extends FirebaseModel {
     private static String table = "projects";
 
     public String id;
-    public int uid;
+    public int uid, category_id;
     public String image, video;
     public String category, name, desc;
     public long funded, modal;
     public int backers;
-    public long deadline;
+    public long deadline, timestamp;
     public List<Integer> products;
+    public List<String> project_sin;
 
     //static methods
     public static DatabaseReference get(String id) {

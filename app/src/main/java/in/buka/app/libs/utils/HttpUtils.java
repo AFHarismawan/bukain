@@ -56,10 +56,10 @@ public class HttpUtils {
             conn.setConnectTimeout(TIMEOUT);
 
             if (method.equals(POST_REQUEST)) {
-                conn.setDoOutput(true);
                 OutputStreamWriter streamWriter = new OutputStreamWriter(conn.getOutputStream());
                 streamWriter.write(query);
                 streamWriter.flush();
+                conn.setDoOutput(true);
             }
 
             int status = conn.getResponseCode();
@@ -77,7 +77,7 @@ public class HttpUtils {
         } finally {
             conn.disconnect();
         }
-        return null;
+        return "{\"status\": \"ERROR\", \"message\": \"Device Connection Error\"}";
     }
 
     private String readStream(InputStream is) throws IOException {

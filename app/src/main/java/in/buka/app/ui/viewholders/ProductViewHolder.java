@@ -13,11 +13,17 @@ import in.buka.app.R;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder {
 
-    public ImageView productImage;
-    public TextView productCategory, productName, productDesc, backers, funded, deadline, deadlineUnit;
-    public ProgressBar percentageFunded;
+    public TextView productName, productDesc, price, stokHabis, sisaBarang, backer, delivery, deliveryTo;
 
     public ProductViewHolder(View itemView) {
         super(itemView);
+        productName = (TextView) itemView.findViewById(R.id.product_title_text_view);
+        productDesc = (TextView) itemView.findViewById(R.id.product_description_text_view);
+        price = (TextView) itemView.findViewById(R.id.product_price);
+        stokHabis = (TextView) itemView.findViewById(R.id.product_all_gone_text_view);
+        sisaBarang = (TextView) itemView.findViewById(R.id.product_limit_and_remaining_text_view);
+        backer = (TextView) itemView.findViewById(R.id.product_backers_text_view);
+        delivery = (TextView) itemView.findViewById(R.id.product_estimated_delivery_date_text_view);
+        deliveryTo = (TextView) itemView.findViewById(R.id.product_shipping_summary_text_view);
     }
 }

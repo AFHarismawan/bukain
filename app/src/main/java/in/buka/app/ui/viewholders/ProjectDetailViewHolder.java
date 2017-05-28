@@ -20,9 +20,7 @@ public class ProjectDetailViewHolder extends RecyclerView.ViewHolder {
             projectCategory,
             location,
             backers,
-            funded,
-            deadline,
-            deadlineUnit;
+            funded;
     public ProgressBar percentageFunded;
 
     public ImageView avatar;
@@ -32,22 +30,21 @@ public class ProjectDetailViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         projectName = (TextView) itemView.findViewById(R.id.project_name);
         creatorName = (TextView) itemView.findViewById(R.id.creator_name);
-        projectCategory = (TextView) itemView.findViewById(R.id.project_category);
+        projectCategory = (TextView) itemView.findViewById(R.id.category);
         sortDesc = (TextView) itemView.findViewById(R.id.sort_description);
         location = (TextView) itemView.findViewById(R.id.location);
 
-        projectImage = (ImageView) itemView.findViewById(R.id.project_image);
+        projectImage = (ImageView) itemView.findViewById(R.id.project_photo);
 
-        backers = (TextView) itemView.findViewById(R.id.project_backers_count);
-        funded = (TextView) itemView.findViewById(R.id.project_funded);
-        deadline = (TextView) itemView.findViewById(R.id.project_deadline);
+        backers = (TextView) itemView.findViewById(R.id.project_social_text);
+        funded = (TextView) itemView.findViewById(R.id.project_state_header_text_view);
         percentageFunded = (ProgressBar) itemView.findViewById(R.id.percentage_funded);
-        deadlineUnit = (TextView) itemView.findViewById(R.id.deadline_countdown_unit);
 
-        avatar = (ImageView) itemView.findViewById(R.id.avatar);
-        avatarName = (TextView) itemView.findViewById(R.id.avatar_name);
         updateCount = (TextView) itemView.findViewById(R.id.updates_count);
         commentCount = (TextView) itemView.findViewById(R.id.comments_count);
         disclaimer = (TextView) itemView.findViewById(R.id.project_disclaimer_text_view);
+
+        avatar = (ImageView) itemView.findViewById(R.id.avatar);
+        avatarName = (TextView) itemView.findViewById(R.id.avatar_name);
     }
 }

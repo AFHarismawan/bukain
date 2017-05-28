@@ -212,7 +212,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
-      <include layout="@layout/project_stats_view" android:layout_weight="1"/>
+      <include layout="@layout/project_stats_view"/>
       <ImageView
         android:id="@+id/project_social_image"
         android:visibility="gone"
