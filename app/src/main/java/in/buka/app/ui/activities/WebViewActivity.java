@@ -3,6 +3,7 @@ package in.buka.app.ui.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import in.buka.app.R;
 
@@ -22,6 +23,7 @@ public abstract class WebViewActivity extends AppCompatActivity {
 
     protected void initWebView() {
         WebView webView = (WebView) findViewById(R.id.web_view);
+        webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
     }
 }
